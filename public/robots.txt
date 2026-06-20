@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sheikhsajid69.qzz.io/sitemap.xml
