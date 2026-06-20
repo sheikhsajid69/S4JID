@@ -31,11 +31,11 @@ export function BlurText({
         <motion.span
           key={`${unit}-${index}`}
           className="inline-block will-change-transform"
-          initial={{ opacity: 0, y: 32, filter: "blur(14px)" }}
+          initial={{ opacity: 0, y: 32 }}
           animate={
             shouldAnimate
-              ? { opacity: 1, y: 0, filter: "blur(0px)" }
-              : { opacity: 0, y: 32, filter: "blur(14px)" }
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 32 }
           }
           transition={{
             duration: 0.7,

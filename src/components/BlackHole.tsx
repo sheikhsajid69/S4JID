@@ -6,6 +6,9 @@ interface Particle {
   y: number;
   originX: number;
   originY: number;
+  /** Relative position (0-1) within the text sample — set once on mount */
+  relX: number;
+  relY: number;
   vx: number;
   vy: number;
   size: number;
@@ -25,6 +28,10 @@ const COLLAPSE_FORCE = 0.0008;
 const FRICTION = 0.985;
 const EVENT_HORIZON = 8;
 
+/** Fixed offscreen canvas dimensions for text sampling — keeps memory low */
+const SAMPLE_W = 600;
+const SAMPLE_H = 150;
+
 export default function BlackHole() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
@@ -41,6 +48,78 @@ export default function BlackHole() {
     let centerY = 0;
     let particles: Particle[] = [];
 
+    // ── Sample text pixels ONCE using a small fixed-size canvas ──
+    function sampleTextPixels(): { relX: number; relY: number }[] {
+      const offscreen = document.createElement("canvas");
+      offscreen.width = SAMPLE_W;
+      offscreen.height = SAMPLE_H;
+      const offCtx = offscreen.getContext("2d");
+      if (!offCtx) return [];
+
+      const fontSize = 52;
+      offCtx.fillStyle = "#ffffff";
+      offCtx.font = `700 ${fontSize}px "Inter", sans-serif`;
+      offCtx.textAlign = "center";
+      offCtx.textBaseline = "middle";
+      offCtx.fillText(TEXT, SAMPLE_W / 2, SAMPLE_H / 2);
+
+      const imageData = offCtx.getImageData(0, 0, SAMPLE_W, SAMPLE_H);
+      const data = imageData.data;
+      const gap = 3;
+      const points: { relX: number; relY: number }[] = [];
+
+      for (let y = 0; y < SAMPLE_H; y += gap) {
+        for (let x = 0; x < SAMPLE_W; x += gap) {
+          const i = (y * SAMPLE_W + x) * 4;
+          if (data[i + 3] > 128) {
+            points.push({
+              relX: (x - SAMPLE_W / 2) / SAMPLE_W,
+              relY: (y - SAMPLE_H / 2) / SAMPLE_H,
+            });
+          }
+        }
+      }
+
+      // Clean up reference so GC can reclaim the canvas backing store
+      offscreen.width = 0;
+      offscreen.height = 0;
+
+      return points;
+    }
+
+    // Sample once
+    const textSamples = sampleTextPixels();
+
+    function buildParticles() {
+      const spread = Math.min(width * 0.85, 900);
+
+      particles = textSamples.map((sample) => {
+        const originX = centerX + sample.relX * spread;
+        const originY = centerY + sample.relY * spread * (SAMPLE_H / SAMPLE_W);
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * Math.max(width, height) * 0.6 + 100;
+
+        return {
+          x: centerX + Math.cos(angle) * dist,
+          y: centerY + Math.sin(angle) * dist,
+          originX,
+          originY,
+          relX: sample.relX,
+          relY: sample.relY,
+          vx: 0,
+          vy: 0,
+          size: PARTICLE_SIZE + Math.random() * 0.6,
+          color: `rgba(221, 91, 0, ${0.5 + Math.random() * 0.5})`,
+          alpha: 0,
+          phase: "form" as const,
+          timer: 0,
+          angle: 0,
+          dist: 0,
+        };
+      });
+    }
+
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const parent = canvas!.parentElement;
@@ -53,57 +132,16 @@ export default function BlackHole() {
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
       centerX = width / 2;
       centerY = height / 2;
-      buildParticles();
-    }
 
-    function buildParticles() {
-      particles = [];
-
-      // Render text to offscreen canvas to sample pixels
-      const offscreen = document.createElement("canvas");
-      const offCtx = offscreen.getContext("2d");
-      if (!offCtx) return;
-
-      const fontSize = Math.min(width * 0.085, 90);
-      offscreen.width = width;
-      offscreen.height = height;
-
-      offCtx.fillStyle = "#ffffff";
-      offCtx.font = `700 ${fontSize}px "Inter", sans-serif`;
-      offCtx.textAlign = "center";
-      offCtx.textBaseline = "middle";
-      offCtx.fillText(TEXT, width / 2, height / 2);
-
-      const imageData = offCtx.getImageData(0, 0, width, height);
-      const data = imageData.data;
-
-      // Sample every Nth pixel to create particles
-      const gap = Math.max(3, Math.round(4 * (900 / width)));
-
-      for (let y = 0; y < height; y += gap) {
-        for (let x = 0; x < width; x += gap) {
-          const i = (y * width + x) * 4;
-          if (data[i + 3] > 128) {
-            const angle = Math.random() * Math.PI * 2;
-            const dist = Math.random() * Math.max(width, height) * 0.6 + 100;
-
-            particles.push({
-              x: centerX + Math.cos(angle) * dist,
-              y: centerY + Math.sin(angle) * dist,
-              originX: x,
-              originY: y,
-              vx: 0,
-              vy: 0,
-              size: PARTICLE_SIZE + Math.random() * 0.6,
-              color: `rgba(221, 91, 0, ${0.5 + Math.random() * 0.5})`,
-              alpha: 0,
-              phase: "form",
-              timer: 0,
-              angle: 0,
-              dist: 0,
-            });
-          }
+      // Recalculate origins from relative positions — no getImageData needed
+      const spread = Math.min(width * 0.85, 900);
+      if (particles.length > 0) {
+        for (const p of particles) {
+          p.originX = centerX + p.relX * spread;
+          p.originY = centerY + p.relY * spread * (SAMPLE_H / SAMPLE_W);
         }
+      } else {
+        buildParticles();
       }
     }
 
@@ -228,7 +266,7 @@ export default function BlackHole() {
 
       drawBlackHole();
 
-      // Draw particles
+      // Draw particles — batch by color to reduce state changes
       for (const p of particles) {
         if (p.alpha <= 0.01) continue;
         ctx!.globalAlpha = p.alpha;

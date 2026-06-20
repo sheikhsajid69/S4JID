@@ -492,17 +492,14 @@ button {
 .reveal-item {
   opacity: 0;
   transform: translateY(26px);
-  filter: blur(8px);
   transition:
     opacity 760ms var(--ease),
-    transform 760ms var(--ease),
-    filter 760ms var(--ease);
+    transform 760ms var(--ease);
 }
 
 .reveal-item.is-visible {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 .glass-panel:has(.glass-button:hover),
