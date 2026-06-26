@@ -115,7 +115,7 @@ export default function App() {
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0f]">
         <video
           ref={videoRef}
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260422_112520_ee819691-f2e8-4c54-bb77-3fb72c84eaa5.mp4"
+          src="/background_video.mp4"
           autoPlay
           loop
           muted
