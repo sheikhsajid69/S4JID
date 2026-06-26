@@ -82,12 +82,18 @@ export default function App() {
       {/* Glass cursor (desktop only) */}
       <GlassCursor />
 
-      {/* Background effects */}
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-90">
-        <div className="noise-mask" />
-        <div className="hero-bleed hero-bleed-left" />
-        <div className="hero-bleed hero-bleed-right" />
-        <motion.div className="glow-orb" style={{ x: glowX, y: glowY }} />
+      {/* Background Video */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0f]">
+        <video
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260411_104032_69319010-2458-492b-b04d-b40a5dfa4482.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover opacity-60"
+        />
+        {/* Dark overlay & slight blur to protect content readability */}
+        <div className="absolute inset-0 bg-[#0a0a0f]/50 backdrop-blur-[1px]" />
       </div>
 
       {/* Liquid Glass Header */}

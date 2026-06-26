@@ -80,11 +80,7 @@ body,
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(circle at 18% 18%, rgba(124, 92, 252, 0.08), transparent 28%),
-    radial-gradient(circle at 82% 22%, rgba(124, 92, 252, 0.09), transparent 26%),
-    radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.05), transparent 35%),
-    var(--bg-main);
+  background: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-sans);
   overflow-x: clip;
