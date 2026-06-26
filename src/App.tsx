@@ -92,90 +92,90 @@ export default function App() {
       </div>
 
       {/* Liquid Glass Header */}
-      <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-6">
-        <Glass
-          style={{
-            background: "rgba(10, 10, 15, 0.55)",
-            borderRadius: 9999,
-            border: "1px solid rgba(255, 255, 255, 0.12)",
-          }}
-        >
-          <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-            <Link to="/" className="flex items-center gap-3">
-              <img
-                src="/s4jid_avatar.png"
-                alt="S4JID"
-                className="h-11 w-11 rounded-full border border-white/10 object-cover"
-              />
-              <div className="hidden sm:block">
-                <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>
-                <p className="text-xs uppercase tracking-[0.28em] text-white/42">Bangalore, India</p>
+      <header className="fixed inset-x-0 top-0 z-40 flex flex-col items-center px-4 pt-4 md:px-6">
+        <div className="w-full max-w-5xl">
+          <Glass
+            style={{
+              background: "rgba(10, 10, 15, 0.55)",
+              borderRadius: 9999,
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+            }}
+          >
+            <nav className="flex items-center justify-between px-4 py-3 md:px-6">
+              <Link to="/" className="flex items-center gap-3">
+                <img
+                  src="/s4jid_avatar.png"
+                  alt="S4JID"
+                  className="h-11 w-11 rounded-full border border-white/10 object-cover"
+                />
+                <div className="hidden sm:block">
+                  <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/42">Bangalore, India</p>
+                </div>
+              </Link>
+
+              <div className="hidden items-center gap-5 md:flex">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`nav-link ${location.pathname === item.to ? "text-white" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
-            </Link>
 
-            <div className="hidden items-center gap-5 md:flex">
-              {navItems.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`nav-link ${location.pathname === item.to ? "text-white" : ""}`}
-                >
-                  {item.label}
+              <div className="hidden items-center gap-3 md:flex">
+                <Link to="/contact">
+                  <Glass
+                    style={{
+                      background: "rgba(255, 255, 255, 0.08)",
+                      borderRadius: 9999,
+                      border: "1px solid rgba(255, 255, 255, 0.14)",
+                      padding: "10px 20px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontSize: 14,
+                      fontWeight: 500,
+                    }}
+                  >
+                    <Mail size={16} />
+                    Get In Touch
+                  </Glass>
                 </Link>
-              ))}
-            </div>
+              </div>
 
-            <div className="hidden items-center gap-3 md:flex">
-              <Link to="/contact">
+              <button
+                type="button"
+                aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+                className="glass-icon-button md:hidden"
+                onClick={() => setMenuOpen((current) => !current)}
+              >
+                {menuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </nav>
+          </Glass>
+
+          {/* Mobile menu */}
+          <AnimatePresence>
+            {menuOpen ? (
+              <motion.div
+                initial={{ opacity: 0, y: -18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+              >
                 <Glass
                   style={{
-                    background: "rgba(255, 255, 255, 0.08)",
-                    borderRadius: 9999,
-                    border: "1px solid rgba(255, 255, 255, 0.14)",
-                    padding: "10px 20px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    fontSize: 14,
-                    fontWeight: 500,
+                    background: "rgba(10, 10, 15, 0.7)",
+                    borderRadius: 28,
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    marginTop: 12,
+                    padding: 16,
                   }}
                 >
-                  <Mail size={16} />
-                  Get In Touch
-                </Glass>
-              </Link>
-            </div>
-
-            <button
-              type="button"
-              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-              className="glass-icon-button md:hidden"
-              onClick={() => setMenuOpen((current) => !current)}
-            >
-              {menuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </nav>
-        </Glass>
-
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {menuOpen ? (
-            <motion.div
-              initial={{ opacity: 0, y: -18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-            >
-              <Glass
-                style={{
-                  background: "rgba(10, 10, 15, 0.7)",
-                  borderRadius: 28,
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  marginTop: 12,
-                  padding: 16,
-                }}
-              >
-                <div className="mx-auto max-w-6xl md:hidden">
                   <div className="flex flex-col gap-2">
                     {navItems.map((item) => (
                       <Link
@@ -196,11 +196,11 @@ export default function App() {
                       sheikhsajid69@protonmail.com
                     </a>
                   </div>
-                </div>
-              </Glass>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+                </Glass>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </div>
       </header>
 
       {/* Routes */}
@@ -217,19 +217,8 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* Footer with Bangalore map */}
-      <footer className="relative z-10 overflow-hidden px-4 pb-8 pt-[4.5rem] text-center md:px-6">
-        {/* Map background */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <img
-            src="/bengaluru_midnight_blue_20260622_105323.png"
-            alt="Bangalore city map"
-            className="mx-auto h-full w-full object-cover opacity-[0.07]"
-            style={{ filter: "brightness(1.4) contrast(1.2)" }}
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent" />
-        </div>
+      {/* Footer */}
+      <footer className="relative z-10 px-4 pb-8 pt-[4.5rem] text-center md:px-6">
 
         <div className="relative mx-auto max-w-6xl border-t border-white/10 pt-8">
           <div className="mb-6 flex justify-center gap-4">
