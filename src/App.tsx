@@ -100,9 +100,9 @@ export default function App() {
               border: "1px solid rgba(255, 255, 255, 0.12)",
             }}
           >
-            <nav className="flex items-center justify-between px-4 py-3 md:px-6">
-              {/* Logo container (flex-1 for left-alignment) */}
-              <div className="flex md:flex-1 justify-start">
+            <nav className="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:gap-8">
+              {/* Logo container */}
+              <div className="flex shrink-0 items-center">
                 <Link to="/" className="flex items-center gap-3">
                   <img
                     src="/s4jid_avatar.png"
@@ -115,8 +115,8 @@ export default function App() {
                 </Link>
               </div>
 
-              {/* Middle links container (centered) */}
-              <div className="hidden items-center gap-6 md:flex md:justify-center">
+              {/* Middle links container */}
+              <div className="hidden shrink-0 items-center gap-5 md:flex lg:gap-8">
                 {navItems.map((item) => (
                   <Link
                     key={item.to}
@@ -128,8 +128,8 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Right side container (flex-1 for right-alignment) */}
-              <div className="flex md:flex-1 items-center justify-end gap-3">
+              {/* Right side container */}
+              <div className="flex shrink-0 items-center gap-3">
                 <div className="hidden items-center md:flex">
                   <Link to="/contact" className="flex items-center">
                     <Glass
