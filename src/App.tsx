@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Mail, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Glass } from "@samasante/liquid-glass";
 
@@ -28,6 +28,39 @@ const navItems = [
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Play background video automatically and handle autoplay blocking policies
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const attemptPlay = () => {
+        video.play().catch((err) => {
+          console.log("Autoplay failed, retrying on user interaction...", err);
+          const enablePlay = () => {
+            video.play();
+            document.removeEventListener("click", enablePlay);
+            document.removeEventListener("touchstart", enablePlay);
+          };
+          document.addEventListener("click", enablePlay);
+          document.addEventListener("touchstart", enablePlay);
+        });
+      };
+      
+      attemptPlay();
+      
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+          video.play().catch(() => {});
+        }
+      };
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
+    }
+  }, []);
   const rawGlowX = useMotionValue(-200);
   const rawGlowY = useMotionValue(-200);
   const glowX = useSpring(rawGlowX, { stiffness: 90, damping: 18, mass: 0.6 });
@@ -85,11 +118,13 @@ export default function App() {
       {/* Background Video */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0f]">
         <video
+          ref={videoRef}
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260411_104032_69319010-2458-492b-b04d-b40a5dfa4482.mp4"
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           className="h-full w-full object-cover opacity-60"
         />
         {/* Dark overlay & slight blur to protect content readability */}
