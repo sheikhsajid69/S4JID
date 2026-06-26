@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
@@ -8,13 +8,13 @@ import GlassCursor from "./components/GlassCursor";
 import { GitHubIcon, LeetCodeIcon, LinkedInIcon, XIcon } from "./components/BrandIcons";
 
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ExperiencePage from "./pages/ExperiencePage";
-import EducationPage from "./pages/EducationPage";
-import SkillsPage from "./pages/SkillsPage";
-import ProjectsPage from "./pages/ProjectsPage";
-import AchievementsPage from "./pages/AchievementsPage";
-import ContactPage from "./pages/ContactPage";
+import AboutSection from "./sections/AboutSection";
+import ExperienceSection from "./sections/ExperienceSection";
+import EducationSection from "./sections/EducationSection";
+import SkillsSection from "./sections/SkillsSection";
+import ProjectsSection from "./sections/ProjectsSection";
+import AchievementsSection from "./sections/AchievementsSection";
+import ContactSection from "./sections/ContactSection";
 
 const navItems = [
   { label: "About", to: "/about" },
@@ -24,6 +24,13 @@ const navItems = [
   { label: "Projects", to: "/projects" },
   { label: "Achievements", to: "/achievements" },
 ];
+
+function SectionPage({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return <div className="pt-24">{children}</div>;
+}
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,10 +68,7 @@ export default function App() {
       };
     }
   }, []);
-  const rawGlowX = useMotionValue(-200);
-  const rawGlowY = useMotionValue(-200);
-  const glowX = useSpring(rawGlowX, { stiffness: 90, damping: 18, mass: 0.6 });
-  const glowY = useSpring(rawGlowY, { stiffness: 90, damping: 18, mass: 0.6 });
+
 
   // Close menu on route change
   useEffect(() => {
@@ -91,15 +95,7 @@ export default function App() {
     return () => observer.disconnect();
   }, [location.pathname]);
 
-  // Glow orb tracking
-  useEffect(() => {
-    const handlePointerMove = (event: PointerEvent) => {
-      rawGlowX.set(event.clientX - 180);
-      rawGlowY.set(event.clientY - 180);
-    };
-    window.addEventListener("pointermove", handlePointerMove);
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [rawGlowX, rawGlowY]);
+
 
   // Close menu on large screens
   useEffect(() => {
@@ -259,13 +255,13 @@ export default function App() {
       <main className="relative z-10">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/education" element={<EducationPage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/achievements" element={<AchievementsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />
+          <Route path="/experience" element={<SectionPage><ExperienceSection /></SectionPage>} />
+          <Route path="/education" element={<SectionPage><EducationSection /></SectionPage>} />
+          <Route path="/skills" element={<SectionPage><SkillsSection /></SectionPage>} />
+          <Route path="/projects" element={<SectionPage><ProjectsSection /></SectionPage>} />
+          <Route path="/achievements" element={<SectionPage><AchievementsSection /></SectionPage>} />
+          <Route path="/contact" element={<SectionPage><ContactSection /></SectionPage>} />
         </Routes>
       </main>
 
