@@ -52,7 +52,6 @@ export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", href: "https://linkedin.com/in/sheikhsajid69" },
   { label: "LeetCode", href: "https://leetcode.com/u/sheikhsajid69/" },
   { label: "X", href: "https://x.com/SheikhSajid69" },
-  { label: "YouTube", href: "https://youtube.com/@sheikhsajid5o5" },
 ];
 
 export const stats: Stat[] = [
@@ -184,6 +183,24 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    name: "Voxel",
+    description:
+      "Client-side image-to-voxel pipeline converter using WebGL and Three.js. Transforms any image into a 3D voxelized render with configurable resolution, color mapping modes, and real-time orbit controls.",
+    tags: ["JavaScript", "Three.js", "WebGL", "Canvas API"],
+    href: "https://github.com/sheikhsajid69/voxel",
+    ctaLabel: "GitHub",
+    meta: "Image-to-voxel 3D pipeline",
+  },
+  {
+    name: "blossom-bg",
+    description:
+      "Cinematic full-screen hero section with animated floral and dark orb themes, built with React 19, TypeScript, Tailwind CSS, and Framer Motion. Drop-in component for premium landing pages.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    href: "https://github.com/sheikhsajid69/blossom-bg",
+    ctaLabel: "GitHub",
+    meta: "Cinematic hero section component",
+  },
   {
     name: "Contri3D",
     description:

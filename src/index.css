@@ -845,3 +845,43 @@ button {
     min-width: 2.5rem;
   }
 }
+
+/* ─── Glass Cursor (desktop only) ─── */
+@media (pointer: fine) {
+  .glass-cursor-area {
+    cursor: none;
+  }
+
+  .glass-cursor-area a,
+  .glass-cursor-area button,
+  .glass-cursor-area [role="button"] {
+    cursor: none;
+  }
+}
+
+/* ─── Active Nav Link ─── */
+.nav-link.text-white {
+  color: white;
+  position: relative;
+}
+
+.nav-link.text-white::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dd5b00;
+  box-shadow: 0 0 8px rgba(221, 91, 0, 0.8);
+}
+
+/* ─── Page transition spacing ─── */
+@media (max-width: 767px) {
+  .section-shell {
+    padding-top: 72px;
+  }
+}
+

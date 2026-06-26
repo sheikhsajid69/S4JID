@@ -2,14 +2,13 @@ import { Mail, Send } from "lucide-react";
 import { useMemo, useState } from "react";
 import { socialLinks } from "../content";
 import { SocialPill } from "../components/SocialPill";
-import { GitHubIcon, LeetCodeIcon, LinkedInIcon, XIcon, YouTubeIcon } from "../components/BrandIcons";
+import { GitHubIcon, LeetCodeIcon, LinkedInIcon, XIcon } from "../components/BrandIcons";
 
 const iconMap = {
   GitHub: <GitHubIcon className="h-[18px] w-[18px]" />,
   LinkedIn: <LinkedInIcon className="h-[18px] w-[18px]" />,
   LeetCode: <LeetCodeIcon className="h-[18px] w-[18px]" />,
   X: <XIcon className="h-[18px] w-[18px]" />,
-  YouTube: <YouTubeIcon className="h-[18px] w-[18px]" />,
 };
 
 export default function ContactSection() {
@@ -20,7 +19,7 @@ export default function ContactSection() {
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`,
     );
-    return `mailto:sheikhsajid.com@gmail.com?subject=${subject}&body=${body}`;
+    return `mailto:sheikhsajid69@protonmail.com?subject=${subject}&body=${body}`;
   }, [form]);
 
   return (
@@ -38,9 +37,9 @@ export default function ContactSection() {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a href="mailto:sheikhsajid.com@gmail.com" className="glass-button">
+          <a href="mailto:sheikhsajid69@protonmail.com" className="glass-button">
             <Mail size={16} />
-            sheikhsajid.com@gmail.com
+            sheikhsajid69@protonmail.com
           </a>
         </div>
 
