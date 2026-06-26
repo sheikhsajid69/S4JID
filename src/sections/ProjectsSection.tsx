@@ -42,22 +42,40 @@ export default function ProjectsSection() {
               ))}
             </div>
 
-            {project.href ? (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="glass-button mt-8 w-fit"
-              >
-                {project.ctaLabel}
-                <ArrowUpRight size={16} />
-              </a>
-            ) : (
-              <span className="glass-button-disabled mt-8 w-fit">
-                {project.ctaLabel}
-                <Lock size={16} />
-              </span>
-            )}
+            <div className="mt-8 flex flex-wrap gap-3">
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-button w-fit"
+                >
+                  {project.ctaLabel}
+                  <ArrowUpRight size={16} />
+                </a>
+              )}
+              {project.website && (
+                <a
+                  href={project.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-button w-fit"
+                  style={{
+                    background: "rgba(221, 91, 0, 0.15)",
+                    borderColor: "rgba(221, 91, 0, 0.35)",
+                  }}
+                >
+                  Visit Site
+                  <ArrowUpRight size={16} />
+                </a>
+              )}
+              {!project.href && !project.website && (
+                <span className="glass-button-disabled w-fit">
+                  {project.ctaLabel}
+                  <Lock size={16} />
+                </span>
+              )}
+            </div>
           </article>
         ))}
       </div>

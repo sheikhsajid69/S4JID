@@ -31,6 +31,7 @@ export type Project = {
   href?: string;
   ctaLabel: string;
   meta: string;
+  website?: string;
 };
 
 export type Achievement = {
@@ -191,6 +192,7 @@ export const projects: Project[] = [
     href: "https://github.com/sheikhsajid69/voxel",
     ctaLabel: "GitHub",
     meta: "Image-to-voxel 3D pipeline",
+    website: "https://voxel.sheikhsajid69.qzz.io",
   },
   {
     name: "blossom-bg",
@@ -200,6 +202,7 @@ export const projects: Project[] = [
     href: "https://github.com/sheikhsajid69/blossom-bg",
     ctaLabel: "GitHub",
     meta: "Cinematic hero section component",
+    website: "https://blossom.sheikhsajid69.qzz.io",
   },
   {
     name: "Contri3D",
@@ -209,6 +212,7 @@ export const projects: Project[] = [
     href: "https://github.com/sheikhsajid69/Contri3D",
     ctaLabel: "GitHub",
     meta: "Hosted at contri3d.vercel.app",
+    website: "https://contri3d.vercel.app",
   },
   {
     name: "InvoiceMindAI",
