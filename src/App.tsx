@@ -101,18 +101,22 @@ export default function App() {
             }}
           >
             <nav className="flex items-center justify-between px-4 py-3 md:px-6">
-              <Link to="/" className="flex items-center gap-3">
-                <img
-                  src="/s4jid_avatar.png"
-                  alt="S4JID"
-                  className="h-11 w-11 rounded-full border border-white/10 object-cover"
-                />
-                <div className="hidden sm:block">
-                  <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>
-                </div>
-              </Link>
+              {/* Logo container (flex-1 for left-alignment) */}
+              <div className="flex md:flex-1 justify-start">
+                <Link to="/" className="flex items-center gap-3">
+                  <img
+                    src="/s4jid_avatar.png"
+                    alt="S4JID"
+                    className="h-11 w-11 rounded-full border border-white/10 object-cover"
+                  />
+                  <div className="hidden sm:block">
+                    <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>
+                  </div>
+                </Link>
+              </div>
 
-              <div className="hidden items-center gap-5 md:flex">
+              {/* Middle links container (centered) */}
+              <div className="hidden items-center gap-6 md:flex md:justify-center">
                 {navItems.map((item) => (
                   <Link
                     key={item.to}
@@ -124,36 +128,39 @@ export default function App() {
                 ))}
               </div>
 
-              <div className="hidden items-center gap-3 md:flex">
-                <Link to="/contact" className="flex items-center">
-                  <Glass
-                    style={{
-                      background: "rgba(255, 255, 255, 0.08)",
-                      borderRadius: 9999,
-                      border: "1px solid rgba(255, 255, 255, 0.14)",
-                      padding: "8px 16px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 8,
-                      fontSize: 14,
-                      fontWeight: 500,
-                      lineHeight: 1,
-                    }}
-                  >
-                    <Mail size={16} className="shrink-0" />
-                    <span>Get In Touch</span>
-                  </Glass>
-                </Link>
-              </div>
+              {/* Right side container (flex-1 for right-alignment) */}
+              <div className="flex md:flex-1 items-center justify-end gap-3">
+                <div className="hidden items-center md:flex">
+                  <Link to="/contact" className="flex items-center">
+                    <Glass
+                      style={{
+                        background: "rgba(255, 255, 255, 0.08)",
+                        borderRadius: 9999,
+                        border: "1px solid rgba(255, 255, 255, 0.14)",
+                        padding: "8px 16px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 8,
+                        fontSize: 14,
+                        fontWeight: 500,
+                        lineHeight: 1,
+                      }}
+                    >
+                      <Mail size={16} className="shrink-0" />
+                      <span>Get In Touch</span>
+                    </Glass>
+                  </Link>
+                </div>
 
-              <button
-                type="button"
-                aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-                className="glass-icon-button md:hidden"
-                onClick={() => setMenuOpen((current) => !current)}
-              >
-                {menuOpen ? <X size={18} /> : <Menu size={18} />}
-              </button>
+                <button
+                  type="button"
+                  aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+                  className="glass-icon-button md:hidden"
+                  onClick={() => setMenuOpen((current) => !current)}
+                >
+                  {menuOpen ? <X size={18} /> : <Menu size={18} />}
+                </button>
+              </div>
             </nav>
           </Glass>
 
