@@ -58,6 +58,23 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
+
+      {/* GitHub 3D Contributions Chart */}
+      <div className="mt-6 w-full" data-reveal>
+        <div className="glass-panel reveal-item p-6 md:p-8">
+          <h3 className="font-display text-2xl italic tracking-[-0.03em] text-white mb-6">
+            Contributions
+          </h3>
+          <div className="w-full overflow-x-auto rounded-xl bg-white/[0.02] border border-white/5 p-4 flex justify-center">
+            <img
+              src="https://contri3d.vercel.app/api/contributions?user=sheikhsajid69&lc=sheikhsajid69&theme=red&size=lg&type=iso&animate=1&labels=1"
+              alt="3D Contribution Chart"
+              className="max-h-[360px] w-auto max-w-none md:max-w-full object-contain"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
