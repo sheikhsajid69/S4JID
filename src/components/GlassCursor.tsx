@@ -3,8 +3,8 @@ import { Glass } from "@samasante/liquid-glass";
 
 /**
  * A highly optimized, hardware-accelerated liquid-glass cursor.
- * Uses requestAnimationFrame and Lerp interpolation to prevent lag and stutter.
- * Uses pointer-events-none to prevent glitching when hovering over interactive elements.
+ * Maps 1-to-1 with the system pointer coordinates instantly (cursor-to-cursor)
+ * without any interpolation lag, and scales smoothly on interactive hovers.
  */
 export default function GlassCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -18,14 +18,11 @@ export default function GlassCursor() {
 
     setVisible(true);
 
-    let mouseX = -100;
-    let mouseY = -100;
-    let currentX = -100;
-    let currentY = -100;
-
     const onMove = (e: PointerEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      if (cursorRef.current) {
+        // Position the 36px wide cursor so it is centered on the pointer coordinates instantly
+        cursorRef.current.style.transform = `translate3d(${e.clientX - 18}px, ${e.clientY - 18}px, 0)`;
+      }
 
       // Check if mouse is hovering over an interactive element
       const target = e.target as HTMLElement | null;
@@ -42,34 +39,17 @@ export default function GlassCursor() {
     };
 
     const onLeave = () => {
-      mouseX = -100;
-      mouseY = -100;
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(-100px, -100px, 0)`;
+      }
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave);
 
-    let frameId: number;
-
-    const updatePosition = () => {
-      if (cursorRef.current) {
-        // Smooth linear interpolation (Lerp)
-        const lerpFactor = 0.15;
-        currentX += (mouseX - currentX) * lerpFactor;
-        currentY += (mouseY - currentY) * lerpFactor;
-
-        // Position the 36px wide cursor so it is centered on the pointer coords
-        cursorRef.current.style.transform = `translate3d(${currentX - 18}px, ${currentY - 18}px, 0)`;
-      }
-      frameId = requestAnimationFrame(updatePosition);
-    };
-
-    frameId = requestAnimationFrame(updatePosition);
-
     return () => {
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
-      cancelAnimationFrame(frameId);
     };
   }, []);
 

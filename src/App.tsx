@@ -23,7 +23,6 @@ const navItems = [
   { label: "Skills", to: "/skills" },
   { label: "Projects", to: "/projects" },
   { label: "Achievements", to: "/achievements" },
-  { label: "Contact", to: "/contact" },
 ];
 
 export default function App() {
@@ -110,7 +109,6 @@ export default function App() {
                 />
                 <div className="hidden sm:block">
                   <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/42">Bangalore, India</p>
                 </div>
               </Link>
 
@@ -127,22 +125,23 @@ export default function App() {
               </div>
 
               <div className="hidden items-center gap-3 md:flex">
-                <Link to="/contact">
+                <Link to="/contact" className="flex items-center">
                   <Glass
                     style={{
                       background: "rgba(255, 255, 255, 0.08)",
                       borderRadius: 9999,
                       border: "1px solid rgba(255, 255, 255, 0.14)",
-                      padding: "10px 20px",
+                      padding: "8px 16px",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: 8,
                       fontSize: 14,
                       fontWeight: 500,
+                      lineHeight: 1,
                     }}
                   >
-                    <Mail size={16} />
-                    Get In Touch
+                    <Mail size={16} className="shrink-0" />
+                    <span>Get In Touch</span>
                   </Glass>
                 </Link>
               </div>
@@ -187,6 +186,13 @@ export default function App() {
                         {item.label}
                       </Link>
                     ))}
+                    <Link
+                      to="/contact"
+                      className="rounded-2xl px-4 py-3 text-sm text-white/76 transition hover:bg-white/6 hover:text-white"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Contact
+                    </Link>
                     <a
                       href="mailto:sheikhsajid69@protonmail.com"
                       className="glass-button mt-2 w-full justify-center"
