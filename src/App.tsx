@@ -125,10 +125,8 @@ export default function App() {
           muted
           playsInline
           preload="auto"
-          className="h-full w-full object-cover opacity-60"
+          className="h-full w-full object-cover"
         />
-        {/* Dark overlay & slight blur to protect content readability */}
-        <div className="absolute inset-0 bg-[#0a0a0f]/50 backdrop-blur-[1px]" />
       </div>
 
       {/* Liquid Glass Header */}
