@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Glass } from "@samasante/liquid-glass";
+import { useDeviceOrientation } from "./hooks/useDeviceOrientation";
 
 import GlassCursor from "./components/GlassCursor";
 import { GitHubIcon, LeetCodeIcon, LinkedInIcon, XIcon } from "./components/BrandIcons";
@@ -36,6 +37,23 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { coords, requestPermission } = useDeviceOrientation();
+
+  // Trigger device orientation permission on user gesture (iOS requirement)
+  useEffect(() => {
+    requestPermission();
+    const handleGesture = () => {
+      requestPermission();
+      document.removeEventListener("click", handleGesture);
+      document.removeEventListener("touchstart", handleGesture);
+    };
+    document.addEventListener("click", handleGesture);
+    document.addEventListener("touchstart", handleGesture);
+    return () => {
+      document.removeEventListener("click", handleGesture);
+      document.removeEventListener("touchstart", handleGesture);
+    };
+  }, []);
 
   // Play background video automatically and handle autoplay blocking policies
   useEffect(() => {
@@ -122,6 +140,10 @@ export default function App() {
           playsInline
           preload="auto"
           className="h-full w-full object-cover"
+          style={{
+            transform: `translate3d(${coords.x}px, ${coords.y}px, 0) scale(1.12)`,
+            willChange: "transform",
+          }}
         />
       </div>
 
