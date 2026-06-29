@@ -222,6 +222,7 @@ export const projects: Project[] = [
     href: "https://github.com/sheikhsajid69/InvoiceMindAi",
     ctaLabel: "GitHub",
     meta: "Autonomous financial reasoning assistant",
+    website: "https://imai.sheikhsajid69.qzz.io",
   },
   {
     name: "MavrickCodeAI",
@@ -254,8 +255,7 @@ export const projects: Project[] = [
     description:
       "EdTech platform scaled through product execution to $5M+ revenue, 1M+ users, and more than 500K downloads.",
     tags: ["EdTech", "Platform", "Startup"],
-    href: "https://zamoshut.com",
-    ctaLabel: "Visit Site",
+    ctaLabel: "Private Build",
     meta: "1M+ users served",
   },
   {
@@ -271,8 +271,7 @@ export const projects: Project[] = [
     description:
       "Design-focused engineering framework for building polished, production-ready component systems with crystalline precision.",
     tags: ["TypeScript", "Design Systems", "Frontend"],
-    href: "https://github.com/sheikhsajid69/Crystal-Works",
-    ctaLabel: "GitHub",
+    ctaLabel: "Private Build",
     meta: "Design-first component framework",
   },
   {
