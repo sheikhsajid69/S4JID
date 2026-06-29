@@ -6,18 +6,18 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative h-16 w-32 flex items-center justify-center overflow-hidden">
+    <div className="w-full relative flex flex-col items-center justify-center overflow-hidden min-h-[90px] rounded-xl">
       {/* YouTube-like Skeleton Pulsing Loader */}
       {!loaded && (
-        <div className="absolute inset-0 animate-pulse rounded-lg bg-white/[0.04] border border-white/5" />
+        <div className="absolute inset-0 animate-pulse bg-white/[0.04] rounded-xl" />
       )}
       
       <img
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
-        className={`h-full w-full object-contain select-none pointer-events-none transition-all duration-700 ease-out ${
-          loaded ? "opacity-45 grayscale contrast-125" : "opacity-0"
+        className={`w-full h-auto max-h-64 object-contain select-none pointer-events-none transition-all duration-700 ease-out ${
+          loaded ? "opacity-100" : "opacity-0"
         }`}
         loading="lazy"
       />
@@ -104,37 +104,39 @@ export default function WorksPage() {
       <SectionHeading
         eyebrow="Works"
         title="Collaborations & Associated Brands"
-        description="A visual timeline of startups, enterprises, and open-source platforms built for, or collaborated with, across various engineering and founder roles."
+        description="A dynamic masonry timeline of startups, enterprises, and open-source platforms built for, or collaborated with, across various engineering and founder roles."
       />
 
-      {/* Collaborated Companies Grid */}
-      <div className="mt-8 glass-panel p-6 md:p-8">
-        <h3 className="font-display text-2xl italic tracking-[-0.03em] text-white mb-6">
+      {/* Collaborated Companies Section */}
+      <div className="mt-8">
+        <h3 className="font-display text-2xl italic tracking-[-0.03em] text-white mb-6 pl-2">
           Collaborated Companies
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6 items-center justify-items-center">
+        <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6">
           {COMPANIES.map((company, index) => (
-            <LogoImage
-              key={`company-${index}`}
-              src={`/companies/${company}`}
-              alt={`Collaborated Company logo ${index + 1}`}
-            />
+            <div key={`company-${index}`} className="break-inside-avoid mb-6">
+              <LogoImage
+                src={`/companies/${company}`}
+                alt={`Collaborated Company logo ${index + 1}`}
+              />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Brands Grid */}
-      <div className="mt-8 glass-panel p-6 md:p-8">
-        <h3 className="font-display text-2xl italic tracking-[-0.03em] text-white mb-6">
+      {/* Associated Brands Section */}
+      <div className="mt-12">
+        <h3 className="font-display text-2xl italic tracking-[-0.03em] text-white mb-6 pl-2">
           Associated Brands
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-6 items-center justify-items-center">
+        <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6">
           {BRANDS.map((brand, index) => (
-            <LogoImage
-              key={`brand-${index}`}
-              src={`/brands/${brand}`}
-              alt={`Associated Brand logo ${index + 1}`}
-            />
+            <div key={`brand-${index}`} className="break-inside-avoid mb-6">
+              <LogoImage
+                src={`/brands/${brand}`}
+                alt={`Associated Brand logo ${index + 1}`}
+              />
+            </div>
           ))}
         </div>
       </div>
