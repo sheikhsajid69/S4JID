@@ -17,6 +17,7 @@ import ProjectsSection from "./sections/ProjectsSection";
 import AchievementsSection from "./sections/AchievementsSection";
 import ContactSection from "./sections/ContactSection";
 import BlogPage from "./pages/BlogPage";
+import WorksPage from "./pages/WorksPage";
 
 const navItems = [
   { label: "About", to: "/about" },
@@ -24,6 +25,7 @@ const navItems = [
   { label: "Education", to: "/education" },
   { label: "Skills", to: "/skills" },
   { label: "Projects", to: "/projects" },
+  { label: "Works", to: "/works" },
   { label: "Achievements", to: "/achievements" },
   { label: "Blog", to: "/blog" },
 ];
@@ -141,6 +143,7 @@ export default function App() {
           muted
           playsInline
           preload="auto"
+          {...{ fetchpriority: "high" }}
           className="h-full w-full object-cover"
           style={{
             transform: `translate3d(${coords.x}px, ${coords.y}px, 0) scale(1.12)`,
@@ -285,6 +288,7 @@ export default function App() {
           <Route path="/skills" element={<SectionPage><SkillsSection /></SectionPage>} />
           <Route path="/projects" element={<SectionPage><ProjectsSection /></SectionPage>} />
           <Route path="/achievements" element={<SectionPage><AchievementsSection /></SectionPage>} />
+          <Route path="/works" element={<SectionPage><WorksPage /></SectionPage>} />
           <Route path="/blog" element={<SectionPage><BlogPage /></SectionPage>} />
           <Route path="/contact" element={<SectionPage><ContactSection /></SectionPage>} />
         </Routes>
