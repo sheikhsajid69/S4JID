@@ -40,15 +40,20 @@ export default function ExperienceSection() {
                     </div>
                     {item.logos && item.logos.length > 0 && (
                       <div className="flex flex-wrap gap-2 shrink-0 mt-2 sm:mt-0">
-                        {item.logos.map((logo, lIdx) => (
-                          <img
-                            key={lIdx}
-                            src={logo}
-                            alt=""
-                            className="h-10 w-10 rounded-lg border border-white/10 bg-white/[0.02] p-1 object-contain select-none pointer-events-none"
-                            loading="lazy"
-                          />
-                        ))}
+                        {item.logos.map((logo, lIdx) => {
+                          const isWhiteBg = logo.includes("neptune") || logo.includes("zamoshut");
+                          return (
+                            <img
+                              key={lIdx}
+                              src={logo}
+                              alt=""
+                              className={`h-10 w-10 rounded-lg border border-white/10 p-1 object-contain select-none pointer-events-none ${
+                                isWhiteBg ? "bg-white" : "bg-white/[0.02]"
+                              }`}
+                              loading="lazy"
+                            />
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -107,15 +112,20 @@ export default function ExperienceSection() {
                     </div>
                     {item.logos && item.logos.length > 0 && (
                       <div className="flex flex-wrap gap-2 shrink-0 mt-2 sm:mt-0">
-                        {item.logos.map((logo, lIdx) => (
-                          <img
-                            key={lIdx}
-                            src={logo}
-                            alt=""
-                            className="h-10 w-10 rounded-lg border border-white/10 bg-white/[0.02] p-1 object-contain select-none pointer-events-none"
-                            loading="lazy"
-                          />
-                        ))}
+                        {item.logos.map((logo, lIdx) => {
+                          const isWhiteBg = logo.includes("neptune") || logo.includes("zamoshut");
+                          return (
+                            <img
+                              key={lIdx}
+                              src={logo}
+                              alt=""
+                              className={`h-10 w-10 rounded-lg border border-white/10 p-1 object-contain select-none pointer-events-none ${
+                                isWhiteBg ? "bg-white" : "bg-white/[0.02]"
+                              }`}
+                              loading="lazy"
+                            />
+                          );
+                        })}
                       </div>
                     )}
                   </div>
