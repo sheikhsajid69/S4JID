@@ -13,6 +13,7 @@ export type Experience = {
   company: string;
   period: string;
   highlights: string[];
+  logos?: string[];
 };
 
 export type SkillGroup = {
@@ -74,6 +75,7 @@ export const experiences: Experience[] = [
       "Own architecture decisions across developer experience, delivery velocity, and production resilience.",
       "Push the stack toward tools that shorten the distance from idea to shipped software.",
     ],
+    logos: ["/exp-co/neptune-png.png"],
   },
   {
     role: "Founder & CEO",
@@ -84,6 +86,7 @@ export const experiences: Experience[] = [
       "Directed distributed teams across engineering, operations, product strategy, and client delivery.",
       "Turned custom product demands into reusable production workflows and durable internal systems.",
     ],
+    logos: ["/exp-co/sphereworks-logo.jpg"],
   },
   {
     role: "GSoC Contributor",
@@ -94,6 +97,7 @@ export const experiences: Experience[] = [
       "Worked with mentors and maintainers on production-grade implementation, review, and documentation cycles.",
       "Expanded public technical credibility through code quality, iteration discipline, and community-facing delivery.",
     ],
+    logos: ["/exp-co/google_logo.jpg"],
   },
   {
     role: "Founder & CEO",
@@ -104,15 +108,21 @@ export const experiences: Experience[] = [
       "Helped drive $5M+ revenue, 1M+ users, and 500K+ downloads through product-led execution.",
       "Built the operating engine spanning product, growth, support, and delivery systems.",
     ],
+    logos: ["/exp-co/zamoshut-logo.png"],
   },
   {
-    role: "Senior App Dev",
-    company: "Freelance (Fiverr/Upwork)",
+    role: "Senior Web and App developer",
+    company: "Freelance (Fiverr / Upwork / PeoplePerHour)",
     period: "Nov 2022 - Jan 2025",
     highlights: [
       "Delivered web, mobile, and automation products for startups and businesses across 15+ countries.",
       "Specialized in shipping quickly without giving up product polish or production readiness.",
       "Turned ambiguous client asks into maintainable systems, launch-ready apps, and measurable outcomes.",
+    ],
+    logos: [
+      "/exp-co/fiverr_com_logo.jpg",
+      "/exp-co/upwork_logo.jpg",
+      "/exp-co/peopleperhour_com_logo.jpg",
     ],
   },
 ];

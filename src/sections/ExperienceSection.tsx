@@ -32,9 +32,26 @@ export default function ExperienceSection() {
                   className="exp-grid__card reveal-item glass-panel"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <p className="exp-grid__eyebrow">{item.period}</p>
-                  <h3 className="exp-grid__title">{item.role}</h3>
-                  <p className="exp-grid__company">{item.company}</p>
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <p className="exp-grid__eyebrow">{item.period}</p>
+                      <h3 className="exp-grid__title">{item.role}</h3>
+                      <p className="exp-grid__company">{item.company}</p>
+                    </div>
+                    {item.logos && item.logos.length > 0 && (
+                      <div className="flex flex-wrap gap-2 shrink-0 mt-2 sm:mt-0">
+                        {item.logos.map((logo, lIdx) => (
+                          <img
+                            key={lIdx}
+                            src={logo}
+                            alt=""
+                            className="h-10 w-10 rounded-lg border border-white/10 bg-white/[0.02] p-1 object-contain select-none pointer-events-none"
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <hr className="hairline my-4" />
                   <ul className="exp-grid__highlights">
                     {item.highlights.map((h) => (
@@ -82,9 +99,26 @@ export default function ExperienceSection() {
                   className="exp-grid__card reveal-item glass-panel"
                   style={{ transitionDelay: `${(index + 3) * 100}ms` }}
                 >
-                  <p className="exp-grid__eyebrow">{item.period}</p>
-                  <h3 className="exp-grid__title">{item.role}</h3>
-                  <p className="exp-grid__company">{item.company}</p>
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <p className="exp-grid__eyebrow">{item.period}</p>
+                      <h3 className="exp-grid__title">{item.role}</h3>
+                      <p className="exp-grid__company">{item.company}</p>
+                    </div>
+                    {item.logos && item.logos.length > 0 && (
+                      <div className="flex flex-wrap gap-2 shrink-0 mt-2 sm:mt-0">
+                        {item.logos.map((logo, lIdx) => (
+                          <img
+                            key={lIdx}
+                            src={logo}
+                            alt=""
+                            className="h-10 w-10 rounded-lg border border-white/10 bg-white/[0.02] p-1 object-contain select-none pointer-events-none"
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <hr className="hairline my-4" />
                   <ul className="exp-grid__highlights">
                     {item.highlights.map((h) => (
