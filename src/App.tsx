@@ -16,6 +16,7 @@ import SkillsSection from "./sections/SkillsSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import AchievementsSection from "./sections/AchievementsSection";
 import ContactSection from "./sections/ContactSection";
+import BlogPage from "./pages/BlogPage";
 
 const navItems = [
   { label: "About", to: "/about" },
@@ -24,6 +25,7 @@ const navItems = [
   { label: "Skills", to: "/skills" },
   { label: "Projects", to: "/projects" },
   { label: "Achievements", to: "/achievements" },
+  { label: "Blog", to: "/blog" },
 ];
 
 function SectionPage({ children }: { children: React.ReactNode }) {
@@ -283,6 +285,7 @@ export default function App() {
           <Route path="/skills" element={<SectionPage><SkillsSection /></SectionPage>} />
           <Route path="/projects" element={<SectionPage><ProjectsSection /></SectionPage>} />
           <Route path="/achievements" element={<SectionPage><AchievementsSection /></SectionPage>} />
+          <Route path="/blog" element={<SectionPage><BlogPage /></SectionPage>} />
           <Route path="/contact" element={<SectionPage><ContactSection /></SectionPage>} />
         </Routes>
       </main>
