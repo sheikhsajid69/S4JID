@@ -169,7 +169,7 @@ export default function App() {
                   <img
                     src="/s4jid_avatar.png"
                     alt="S4JID"
-                    className="h-11 w-11 object-cover"
+                    className="h-11 w-auto object-contain"
                   />
                   <div className="hidden sm:block">
                     <p className="font-display text-2xl italic tracking-[-0.05em] text-white">S4JID</p>

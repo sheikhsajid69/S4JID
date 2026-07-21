@@ -162,7 +162,7 @@ export default function BlogPage() {
                       <img
                         src={post.author.avatar}
                         alt={post.author.name}
-                        className="h-6 w-6 object-cover"
+                        className="h-6 w-auto object-contain"
                       />
                       <span className="text-xs font-medium text-white/66">
                         {post.author.username}
@@ -220,7 +220,7 @@ export default function BlogPage() {
               <img
                 src={activePost.author.avatar}
                 alt={activePost.author.name}
-                className="h-9 w-9 object-cover"
+                className="h-9 w-auto object-contain"
               />
               <div>
                 <p className="text-sm font-medium text-white">{activePost.author.name}</p>
