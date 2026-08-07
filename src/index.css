@@ -842,19 +842,6 @@ button {
   }
 }
 
-/* ─── Glass Cursor (desktop only) ─── */
-@media (pointer: fine) {
-  .glass-cursor-area {
-    cursor: none;
-  }
-
-  .glass-cursor-area a,
-  .glass-cursor-area button,
-  .glass-cursor-area [role="button"] {
-    cursor: none;
-  }
-}
-
 /* ─── Active Nav Link ─── */
 .nav-link.text-white {
   color: white;

@@ -5,7 +5,6 @@ import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Glass } from "@samasante/liquid-glass";
 import { useDeviceOrientation } from "./hooks/useDeviceOrientation";
 
-import GlassCursor from "./components/GlassCursor";
 import { GitHubIcon, LeetCodeIcon, LinkedInIcon, XIcon } from "./components/BrandIcons";
 
 import HomePage from "./pages/HomePage";
@@ -129,10 +128,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="glass-cursor-area relative min-h-screen overflow-x-clip bg-[#0a0a0f] text-[#f0f0f5]">
-      {/* Glass cursor (desktop only) */}
-      <GlassCursor />
-
+    <div className="relative min-h-screen overflow-x-clip bg-[#0a0a0f] text-[#f0f0f5]">
       {/* Background Video */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0a0a0f]">
         <video
