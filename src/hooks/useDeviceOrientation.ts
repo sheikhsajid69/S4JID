@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Custom hook to track mobile device orientation and motion events.
- * Smooths orientation (tilting) via Lerp and models shakes via slosh physics.
+ * Smooths orientation (tilting) via Lerp and applies direct DOM transforms to target element
+ * to eliminate React root re-render overhead (60fps main-thread lag).
  */
-export function useDeviceOrientation() {
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+export function useDeviceOrientation(elementRef?: React.RefObject<HTMLElement | null>) {
   const [permissionGranted, setPermissionGranted] = useState<boolean | null>(null);
 
   // Target positions populated by raw events
@@ -26,6 +26,9 @@ export function useDeviceOrientation() {
   const lastZ = useRef<number | null>(null);
   const lastUpdate = useRef(0);
 
+  // Track if orientation events are actively firing
+  const hasOrientationEvents = useRef(false);
+
   // Request permission (needed for iOS 13+)
   const requestPermission = async () => {
     const DeviceOrientation = (window as any).DeviceOrientationEvent;
@@ -42,27 +45,29 @@ export function useDeviceOrientation() {
         setPermissionGranted(false);
       }
     } else {
-      // Non-iOS or older iOS versions
       setPermissionGranted(true);
     }
   };
 
   useEffect(() => {
-    if (permissionGranted !== true) return;
+    // Only listen on mobile/touch devices with fine orientation sensors
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    if (permissionGranted === false) return;
 
     // Listen to orientation (tilt)
     const handleOrientation = (e: DeviceOrientationEvent) => {
-      const rawGamma = e.gamma !== null ? e.gamma : 0;
-      const rawBeta = e.beta !== null ? e.beta : 45; // Default viewing angle
+      if (e.gamma === null && e.beta === null) return;
+      hasOrientationEvents.current = true;
 
-      // Clamp tilt values to prevent background escaping scale bounds
-      const clampVal = 30;
+      const rawGamma = e.gamma !== null ? e.gamma : 0;
+      const rawBeta = e.beta !== null ? e.beta : 45;
+
+      const clampVal = 25;
       const gammaClamped = Math.max(-clampVal, Math.min(clampVal, rawGamma));
       const betaClamped = Math.max(-clampVal, Math.min(clampVal, rawBeta - 45));
 
-      // Target offsets (scale down to a comfortable displacement range)
-      targetX.current = -gammaClamped * 0.8;
-      targetY.current = -betaClamped * 0.8;
+      targetX.current = -gammaClamped * 0.6;
+      targetY.current = -betaClamped * 0.6;
     };
 
     // Listen to motion (shake detection)
@@ -82,12 +87,9 @@ export function useDeviceOrientation() {
 
         if (lastX.current !== null && lastY.current !== null && lastZ.current !== null) {
           const speed = Math.abs(x + y + z - lastX.current - lastY.current - lastZ.current) / diffTime * 10000;
-
-          // Threshold for a shake event
           if (speed > 800) {
-            // Inject velocity into the position coordinates (slosh effect)
-            shakeVelocityX.current += x * 2.5;
-            shakeVelocityY.current += y * 2.5;
+            shakeVelocityX.current += x * 2;
+            shakeVelocityY.current += y * 2;
           }
         }
 
@@ -97,28 +99,29 @@ export function useDeviceOrientation() {
       }
     };
 
-    window.addEventListener("deviceorientation", handleOrientation);
-    window.addEventListener("devicemotion", handleMotion);
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    window.addEventListener("devicemotion", handleMotion, { passive: true });
 
-    // Animation frame loop
     let rafId = 0;
     const animate = () => {
-      const lerpFactor = 0.08;
-      currentX.current += (targetX.current - currentX.current) * lerpFactor;
-      currentY.current += (targetY.current - currentY.current) * lerpFactor;
+      // Only run RAF loop if orientation events are actively firing and element exists
+      if (hasOrientationEvents.current && elementRef?.current) {
+        const lerpFactor = 0.08;
+        currentX.current += (targetX.current - currentX.current) * lerpFactor;
+        currentY.current += (targetY.current - currentY.current) * lerpFactor;
 
-      // Add shake velocity and apply friction decay
-      currentX.current += shakeVelocityX.current;
-      currentY.current += shakeVelocityY.current;
-      shakeVelocityX.current *= 0.88;
-      shakeVelocityY.current *= 0.88;
+        currentX.current += shakeVelocityX.current;
+        currentY.current += shakeVelocityY.current;
+        shakeVelocityX.current *= 0.88;
+        shakeVelocityY.current *= 0.88;
 
-      // Safety bounds (prevents shifting background past the scaled edges)
-      const maxOffset = 32;
-      const xOffset = Math.max(-maxOffset, Math.min(maxOffset, currentX.current));
-      const yOffset = Math.max(-maxOffset, Math.min(maxOffset, currentY.current));
+        const maxOffset = 24;
+        const xOffset = Math.max(-maxOffset, Math.min(maxOffset, currentX.current));
+        const yOffset = Math.max(-maxOffset, Math.min(maxOffset, currentY.current));
 
-      setCoords({ x: xOffset, y: yOffset });
+        elementRef.current.style.transform = `translate3d(${xOffset.toFixed(2)}px, ${yOffset.toFixed(2)}px, 0) scale(1.08)`;
+      }
+
       rafId = requestAnimationFrame(animate);
     };
 
@@ -129,7 +132,7 @@ export function useDeviceOrientation() {
       window.removeEventListener("devicemotion", handleMotion);
       cancelAnimationFrame(rafId);
     };
-  }, [permissionGranted]);
+  }, [permissionGranted, elementRef]);
 
-  return { coords, requestPermission, permissionGranted };
+  return { requestPermission, permissionGranted };
 }

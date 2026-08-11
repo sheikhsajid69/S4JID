@@ -40,7 +40,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { coords, requestPermission } = useDeviceOrientation();
+  const { requestPermission } = useDeviceOrientation(videoRef);
 
   // Trigger device orientation permission on user gesture (iOS requirement)
   useEffect(() => {
@@ -62,6 +62,11 @@ export default function App() {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        video.pause();
+        return;
+      }
+
       const attemptPlay = () => {
         video.play().catch((err) => {
           console.log("Autoplay failed, retrying on user interaction...", err);
@@ -70,20 +75,22 @@ export default function App() {
             document.removeEventListener("click", enablePlay);
             document.removeEventListener("touchstart", enablePlay);
           };
-          document.addEventListener("click", enablePlay);
-          document.addEventListener("touchstart", enablePlay);
+          document.addEventListener("click", enablePlay, { once: true });
+          document.addEventListener("touchstart", enablePlay, { once: true });
         });
       };
-      
+
       attemptPlay();
-      
+
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           video.play().catch(() => {});
+        } else {
+          video.pause();
         }
       };
       document.addEventListener("visibilitychange", handleVisibilityChange);
-      
+
       return () => {
         document.removeEventListener("visibilitychange", handleVisibilityChange);
       };
@@ -142,7 +149,7 @@ export default function App() {
           {...{ fetchpriority: "high" }}
           className="h-full w-full object-cover"
           style={{
-            transform: `translate3d(${coords.x}px, ${coords.y}px, 0) scale(1.12)`,
+            transform: "scale(1.08)",
             willChange: "transform",
           }}
         />

@@ -26,7 +26,6 @@ const FORM_SPEED = 0.04;
 const HOLD_DURATION = 180; // frames
 const COLLAPSE_FORCE = 0.0008;
 const FRICTION = 0.985;
-const EVENT_HORIZON = 8;
 
 /** Fixed offscreen canvas dimensions for text sampling — keeps memory low */
 const SAMPLE_W = 600;
@@ -35,6 +34,7 @@ const SAMPLE_H = 150;
 export default function BlackHole() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
+  const isVisibleRef = useRef<boolean>(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,7 +48,7 @@ export default function BlackHole() {
     let centerY = 0;
     let particles: Particle[] = [];
 
-    // ── Sample text pixels ONCE using a small fixed-size canvas ──
+    // Sample text pixels ONCE using a small fixed-size canvas
     function sampleTextPixels(): { relX: number; relY: number }[] {
       const offscreen = document.createElement("canvas");
       offscreen.width = SAMPLE_W;
@@ -80,14 +80,12 @@ export default function BlackHole() {
         }
       }
 
-      // Clean up reference so GC can reclaim the canvas backing store
       offscreen.width = 0;
       offscreen.height = 0;
 
       return points;
     }
 
-    // Sample once
     const textSamples = sampleTextPixels();
 
     function buildParticles() {
@@ -98,142 +96,125 @@ export default function BlackHole() {
         const originY = centerY + sample.relY * spread * (SAMPLE_H / SAMPLE_W);
 
         const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * Math.max(width, height) * 0.6 + 100;
+        const startDist = 300 + Math.random() * 400;
+
+        const isAmber = Math.random() > 0.45;
+        const color = isAmber
+          ? `rgba(221, ${91 + Math.floor(Math.random() * 40)}, 0, `
+          : `rgba(124, ${92 + Math.floor(Math.random() * 40)}, 252, `;
 
         return {
-          x: centerX + Math.cos(angle) * dist,
-          y: centerY + Math.sin(angle) * dist,
+          x: centerX + Math.cos(angle) * startDist,
+          y: centerY + Math.sin(angle) * startDist,
           originX,
           originY,
           relX: sample.relX,
           relY: sample.relY,
           vx: 0,
           vy: 0,
-          size: PARTICLE_SIZE + Math.random() * 0.6,
-          color: `rgba(221, 91, 0, ${0.5 + Math.random() * 0.5})`,
+          size: PARTICLE_SIZE + (Math.random() - 0.5) * 0.6,
+          color,
           alpha: 0,
-          phase: "form" as const,
-          timer: 0,
-          angle: 0,
-          dist: 0,
+          phase: "form",
+          timer: Math.floor(Math.random() * 40),
+          angle,
+          dist: startDist,
         };
       });
     }
 
     function resize() {
+      if (!canvas) return;
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const parent = canvas!.parentElement;
-      width = parent?.clientWidth || window.innerWidth;
-      height = parent?.clientHeight || window.innerHeight;
-      canvas!.width = width * dpr;
-      canvas!.height = height * dpr;
-      canvas!.style.width = `${width}px`;
-      canvas!.style.height = `${height}px`;
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx!.scale(dpr, dpr);
       centerX = width / 2;
       centerY = height / 2;
-
-      // Recalculate origins from relative positions — no getImageData needed
-      const spread = Math.min(width * 0.85, 900);
-      if (particles.length > 0) {
-        for (const p of particles) {
-          p.originX = centerX + p.relX * spread;
-          p.originY = centerY + p.relY * spread * (SAMPLE_H / SAMPLE_W);
-        }
-      } else {
-        buildParticles();
-      }
+      buildParticles();
     }
 
     function update() {
       for (const p of particles) {
-        switch (p.phase) {
-          case "form": {
-            // Lerp toward origin position
-            const dx = p.originX - p.x;
-            const dy = p.originY - p.y;
-            p.x += dx * FORM_SPEED;
-            p.y += dy * FORM_SPEED;
-            p.alpha = Math.min(p.alpha + 0.025, 1);
-
-            // Check if close enough to origin
-            if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
-              p.x = p.originX;
-              p.y = p.originY;
-              p.phase = "hold";
-              p.timer = 0;
-            }
-            break;
+        if (p.phase === "form") {
+          if (p.timer > 0) {
+            p.timer--;
+            continue;
           }
 
-          case "hold": {
-            p.timer++;
-            // Slight shimmer
-            p.alpha = 0.8 + Math.sin(p.timer * 0.08) * 0.2;
-            if (p.timer >= HOLD_DURATION) {
-              p.phase = "collapse";
-              p.vx = (Math.random() - 0.5) * 0.5;
-              p.vy = (Math.random() - 0.5) * 0.5;
-            }
-            break;
+          p.x += (p.originX - p.x) * FORM_SPEED;
+          p.y += (p.originY - p.y) * FORM_SPEED;
+
+          if (p.alpha < 0.85) p.alpha += 0.03;
+
+          const dx = p.originX - p.x;
+          const dy = p.originY - p.y;
+          if (dx * dx + dy * dy < 4) {
+            p.x = p.originX;
+            p.y = p.originY;
+            p.phase = "hold";
+            p.timer = HOLD_DURATION + Math.floor(Math.random() * 60);
+          }
+        } else if (p.phase === "hold") {
+          p.timer--;
+          p.x = p.originX + Math.sin(Date.now() * 0.002 + p.originX) * 0.6;
+          p.y = p.originY + Math.cos(Date.now() * 0.002 + p.originY) * 0.6;
+
+          if (p.timer <= 0) {
+            p.phase = "collapse";
+            const dx = p.x - centerX;
+            const dy = p.y - centerY;
+            const angle = Math.atan2(dy, dx);
+            const tangentSpeed = 1.2 + Math.random() * 1.5;
+            p.vx = -Math.sin(angle) * tangentSpeed;
+            p.vy = Math.cos(angle) * tangentSpeed;
+          }
+        } else if (p.phase === "collapse") {
+          const dx = centerX - p.x;
+          const dy = centerY - p.y;
+          const distSq = dx * dx + dy * dy;
+          const dist = Math.sqrt(distSq);
+
+          if (dist < 12) {
+            p.phase = "reset";
+            p.alpha = 0;
+            p.timer = Math.floor(Math.random() * 30);
+            continue;
           }
 
-          case "collapse": {
-            // Gravitational pull toward center
-            const dx = centerX - p.x;
-            const dy = centerY - p.y;
-            const distSq = dx * dx + dy * dy;
-            const dist = Math.sqrt(distSq);
+          const force = COLLAPSE_FORCE * (4000 / (dist + 20));
+          p.vx += dx * force;
+          p.vy += dy * force;
 
-            if (dist < EVENT_HORIZON) {
-              p.phase = "reset";
-              p.timer = 0;
-              break;
-            }
+          p.vx *= FRICTION;
+          p.vy *= FRICTION;
 
-            // Gravity scales with 1/dist (not 1/dist² for visual effect)
-            const force = COLLAPSE_FORCE * Math.max(width, 600);
-            const ax = (dx / dist) * (force / Math.max(dist, 1));
-            const ay = (dy / dist) * (force / Math.max(dist, 1));
+          p.x += p.vx;
+          p.y += p.vy;
 
-            // Add tangential component for spiral effect
-            const tangentX = -dy / dist;
-            const tangentY = dx / dist;
-            const spiralStrength = 0.3;
-
-            p.vx += ax + tangentX * spiralStrength * (force / Math.max(dist, 1)) * 0.3;
-            p.vy += ay + tangentY * spiralStrength * (force / Math.max(dist, 1)) * 0.3;
-            p.vx *= FRICTION;
-            p.vy *= FRICTION;
-            p.x += p.vx;
-            p.y += p.vy;
-
-            // Fade as it approaches center
-            p.alpha = Math.min(1, dist / 100);
-            break;
+          if (dist < 80) {
+            p.alpha = Math.max(0, (dist - 12) / 68);
           }
-
-          case "reset": {
-            p.timer++;
-            if (p.timer > 20) {
-              // Respawn at random edge position
-              const angle = Math.random() * Math.PI * 2;
-              const respawnDist = Math.random() * Math.max(width, height) * 0.5 + 200;
-              p.x = centerX + Math.cos(angle) * respawnDist;
-              p.y = centerY + Math.sin(angle) * respawnDist;
-              p.vx = 0;
-              p.vy = 0;
-              p.alpha = 0;
-              p.phase = "form";
-            }
-            break;
+        } else if (p.phase === "reset") {
+          p.timer--;
+          if (p.timer <= 0) {
+            const angle = Math.random() * Math.PI * 2;
+            const startDist = 250 + Math.random() * 350;
+            p.x = centerX + Math.cos(angle) * startDist;
+            p.y = centerY + Math.sin(angle) * startDist;
+            p.vx = 0;
+            p.vy = 0;
+            p.alpha = 0;
+            p.phase = "form";
+            p.timer = 0;
           }
         }
       }
     }
 
     function drawBlackHole() {
-      // Dark center
       const gradient = ctx!.createRadialGradient(
         centerX, centerY, 0,
         centerX, centerY, 60
@@ -247,7 +228,6 @@ export default function BlackHole() {
       ctx!.arc(centerX, centerY, 60, 0, Math.PI * 2);
       ctx!.fill();
 
-      // Subtle orange rim glow
       const rimGlow = ctx!.createRadialGradient(
         centerX, centerY, 3,
         centerX, centerY, 25
@@ -263,10 +243,8 @@ export default function BlackHole() {
 
     function render() {
       ctx!.clearRect(0, 0, width, height);
-
       drawBlackHole();
 
-      // Draw particles — batch by color to reduce state changes
       for (const p of particles) {
         if (p.alpha <= 0.01) continue;
         ctx!.globalAlpha = p.alpha;
@@ -277,18 +255,56 @@ export default function BlackHole() {
       ctx!.globalAlpha = 1;
     }
 
+    let isRunning = false;
     function loop() {
+      if (!isVisibleRef.current || document.hidden) {
+        isRunning = false;
+        return;
+      }
+      isRunning = true;
       update();
       render();
       rafRef.current = requestAnimationFrame(loop);
     }
 
+    function startLoop() {
+      if (!isRunning) {
+        isRunning = true;
+        loop();
+      }
+    }
+
+    // IntersectionObserver to pause loop when canvas is scrolled off-screen
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          startLoop();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        isVisibleRef.current = false;
+      } else {
+        isVisibleRef.current = true;
+        startLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
     resize();
-    loop();
+    startLoop();
 
     window.addEventListener("resize", resize);
     return () => {
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      observer.disconnect();
       cancelAnimationFrame(rafRef.current);
     };
   }, []);

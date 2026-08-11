@@ -44,7 +44,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-          className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[0.72rem] uppercase tracking-[0.125px] text-white/56 shadow-[0_0_40px_rgba(124,92,252,0.08)] backdrop-blur-xl"
+          className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[0.72rem] uppercase tracking-[0.125px] text-white/60 shadow-[0_0_40px_rgba(124,92,252,0.08)]"
         >
           <span className="h-2 w-2 rounded-full bg-[#dd5b00] shadow-[0_0_10px_rgba(221,91,0,0.9)]" />
           Available for collaborations
@@ -70,11 +70,11 @@ export default function HomePage() {
             style={{
               background: "linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
               boxShadow: "0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06) inset, 0 0 40px rgba(221,91,0,0.12)",
-              backdropFilter: "blur(20px)",
+              backdropFilter: "blur(8px)",
             }}
           >
             <img
-              src="/s4jid_profile_pic.png"
+              src="/frontshot-image.png"
               alt="Sheikh Sajid"
               width={160}
               height={160}
@@ -84,7 +84,7 @@ export default function HomePage() {
           </div>
           <div
             className="absolute -bottom-2 -right-2 flex items-center gap-2 rounded-full border border-white/12 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.28em] text-white/70"
-            style={{ background: "rgba(221,91,0,0.12)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(15,15,24,0.85)", backdropFilter: "blur(8px)" }}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#dd5b00] shadow-[0_0_8px_rgba(221,91,0,1)]" />
             Bangalore

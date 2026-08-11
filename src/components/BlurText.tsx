@@ -30,7 +30,7 @@ export function BlurText({
       {units.map((unit, index) => (
         <motion.span
           key={`${unit}-${index}`}
-          className="inline-block will-change-transform"
+          className="inline-block"
           initial={{ opacity: 0, y: 32 }}
           animate={
             shouldAnimate

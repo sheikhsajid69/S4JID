@@ -145,10 +145,11 @@ button {
     border: 1px solid var(--glass-border);
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-      var(--glass-fill);
+      rgba(15, 15, 24, 0.76);
     box-shadow: var(--glass-shadow);
-    backdrop-filter: blur(20px) saturate(1.25);
-    -webkit-backdrop-filter: blur(20px) saturate(1.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateZ(0);
   }
 
   .glass-panel::before {
@@ -174,11 +175,12 @@ button {
   }
 
   .glass-subcard {
-    @apply rounded-[28px] border border-white/8 bg-white/[0.04] backdrop-blur-2xl;
+    @apply rounded-[28px] border border-white/8 bg-white/[0.06] backdrop-blur-md;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 16px 32px rgba(0, 0, 0, 0.16),
       0 0 32px rgba(124, 92, 252, 0.06);
+    transform: translateZ(0);
   }
 
   .glass-button,
@@ -188,8 +190,8 @@ button {
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(24px) saturate(1.2);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .glass-button,
@@ -255,9 +257,7 @@ button {
   }
 
   .glass-icon-button {
-    @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-white/7 text-white/72 transition-all duration-300;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/72 transition-all duration-300;
   }
 
   .glass-icon-button:hover {
@@ -267,24 +267,20 @@ button {
 
   .tag-pill,
   .skill-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-2 text-xs uppercase tracking-[0.22em] text-white/52;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-3 py-2 text-xs uppercase tracking-[0.22em] text-white/60;
   }
 
   .skill-pill {
-    @apply normal-case tracking-normal text-sm text-white/68;
+    @apply normal-case tracking-normal text-sm text-white/75;
   }
 
   .skill-glyph {
-    @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-white/10 bg-black/22 px-1 text-[0.68rem] font-medium tracking-[0.08em] text-white/62;
+    @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-white/10 bg-black/30 px-1 text-[0.68rem] font-medium tracking-[0.08em] text-white/70;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .social-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-3 transition-all duration-300;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-3 transition-all duration-300;
   }
 
   .social-pill:hover {
@@ -328,9 +324,7 @@ button {
   }
 
   .glass-input {
-    @apply block rounded-[28px] border border-white/10 bg-white/6 px-5 py-4;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    @apply block rounded-[28px] border border-white/10 bg-white/8 px-5 py-4;
     transition:
       border-color 250ms var(--ease),
       box-shadow 250ms var(--ease),
@@ -351,9 +345,7 @@ button {
   }
 
   .glass-inline-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-2 text-[0.72rem] uppercase tracking-[0.28em] text-white/54;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-3 py-2 text-[0.72rem] uppercase tracking-[0.28em] text-white/60;
   }
 
   .glass-signal-icon {
