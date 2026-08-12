@@ -396,7 +396,7 @@ export const achievements: Achievement[] = [
     icon: "speech",
   },
   {
-    title: "SAT 1592/1600",
+    title: "SAT 1150/1600",
     subtitle: "Academic Benchmark",
     icon: "pen",
   },
