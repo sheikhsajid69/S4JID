@@ -1,14 +1,42 @@
-import { BrainCircuit, Braces, CloudCog, Code2, Database, Cpu } from "lucide-react";
+import {
+  BrainCircuit,
+  Braces,
+  CloudCog,
+  Code2,
+  Database,
+  Cpu,
+  Wrench,
+  Briefcase,
+  Kanban,
+  MessageSquare,
+  Building2,
+  ShoppingBag,
+  UserPlus,
+  Handshake,
+  Search,
+  Palette,
+  GraduationCap,
+  Award,
+  TrendingUp,
+  ShieldCheck,
+  Terminal,
+  Rocket,
+  Sparkles,
+  Workflow,
+  Bot,
+} from "lucide-react";
 import { skillGroups } from "../content";
 import { SectionHeading } from "../components/SectionHeading";
 
-const categoryIcons = {
+const categoryIcons: Record<string, React.ElementType> = {
   Languages: Code2,
   Frameworks: Braces,
   "AI / ML": BrainCircuit,
+  "Engineering Tools & Systems": Wrench,
+  "Business & Leadership": Briefcase,
   "Cloud / DevOps": CloudCog,
   Databases: Database,
-} as const;
+};
 
 /* Map skill names to devicon CSS classes */
 const deviconMap: Record<string, string> = {
@@ -41,6 +69,32 @@ const deviconMap: Record<string, string> = {
   MySQL: "devicon-mysql-plain colored",
   Redis: "devicon-redis-plain colored",
   Supabase: "devicon-supabase-plain colored",
+  Git: "devicon-git-plain colored",
+  GitHub: "devicon-github-original",
+  npm: "devicon-npm-original-wordmark colored",
+  "Open Source Software": "devicon-linux-plain colored",
+};
+
+/* Map non-devicon skill names to crisp Lucide icons */
+const lucideIconMap: Record<string, React.ElementType> = {
+  "Claude Code": Bot,
+  Codex: Code2,
+  "Kilo Code": Terminal,
+  Antigravity: Rocket,
+  "Gen AI": Sparkles,
+  "Forward Deploy Engineer": Workflow,
+  "Project Management": Kanban,
+  Communication: MessageSquare,
+  B2B: Building2,
+  B2C: ShoppingBag,
+  "Talent Acquisition": UserPlus,
+  Negotiation: Handshake,
+  SEO: Search,
+  "Brand Identity": Palette,
+  "Peer Mentoring": GraduationCap,
+  Branding: Award,
+  "Venture Capital Strategist": TrendingUp,
+  "Copyright Enabler": ShieldCheck,
 };
 
 export default function SkillsSection() {
@@ -54,7 +108,7 @@ export default function SkillsSection() {
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {skillGroups.map((group, index) => {
-          const Icon = categoryIcons[group.category as keyof typeof categoryIcons];
+          const Icon = categoryIcons[group.category] || Code2;
 
           return (
             <article
@@ -78,10 +132,13 @@ export default function SkillsSection() {
               <div className="flex flex-wrap gap-3">
                 {group.skills.map((skill) => {
                   const deviconClass = deviconMap[skill.name];
+                  const LucideSkillIcon = lucideIconMap[skill.name];
                   return (
                     <span key={skill.name} className="skill-pill">
                       {deviconClass ? (
                         <i className={deviconClass} style={{ fontSize: "16px" }} />
+                      ) : LucideSkillIcon ? (
+                        <LucideSkillIcon size={14} className="text-white/70" />
                       ) : (
                         <Cpu size={14} className="text-white/60" />
                       )}
