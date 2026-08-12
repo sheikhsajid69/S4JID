@@ -195,6 +195,33 @@ export const skillGroups: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    name: "Claude Code Toon-Skill",
+    description:
+      "Token-Oriented Object Notation (TOON) prompt compression plugin for Claude Code and AI coding assistants. Reduces prompt token consumption by 30-60% while maintaining unambiguous instruction structure.",
+    tags: ["AI", "Claude Code", "Developer Tools", "Open Source"],
+    href: "https://github.com/sheikhsajid69/toon-skill",
+    ctaLabel: "GitHub",
+    meta: "TOON prompt compression for AI agents",
+  },
+  {
+    name: "Studio Chart",
+    description:
+      "Automated visualization tool that converts raw Google Form responses into dynamic, presentation-ready charts and analytical graphs for instant reporting.",
+    tags: ["TypeScript", "Data Visualization", "Google Apps Script", "DevTools"],
+    href: "https://github.com/sheikhsajid69/graphs-from-google-form-responses",
+    ctaLabel: "GitHub",
+    meta: "Form responses to presentation charts",
+  },
+  {
+    name: "Auto-Mute Ad Blocker",
+    description:
+      "Smart browser extension and utility that automatically detects and mutes video/audio advertisements seamlessly across web streaming platforms.",
+    tags: ["JavaScript", "Browser Extension", "Ad Blocker", "Open Source"],
+    href: "https://github.com/sheikhsajid69/auto-mute",
+    ctaLabel: "GitHub",
+    meta: "Automated video & audio ad muter",
+  },
+  {
     name: "Voxel",
     description:
       "Client-side image-to-voxel pipeline converter using WebGL and Three.js. Transforms any image into a 3D voxelized render with configurable resolution, color mapping modes, and real-time orbit controls.",
