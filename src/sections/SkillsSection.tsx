@@ -85,8 +85,6 @@ const lucideIconMap: Record<string, React.ElementType> = {
   "Forward Deploy Engineer": Workflow,
   "Project Management": Kanban,
   Communication: MessageSquare,
-  B2B: Building2,
-  B2C: ShoppingBag,
   "Talent Acquisition": UserPlus,
   Negotiation: Handshake,
   SEO: Search,

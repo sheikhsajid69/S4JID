@@ -189,8 +189,6 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "Project Management", glyph: "PM" },
       { name: "Communication", glyph: "CM" },
-      { name: "B2B", glyph: "B2" },
-      { name: "B2C", glyph: "BC" },
       { name: "Talent Acquisition", glyph: "TA" },
       { name: "Negotiation", glyph: "NG" },
       { name: "SEO", glyph: "SO" },
