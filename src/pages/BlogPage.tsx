@@ -18,9 +18,57 @@ interface BlogPost {
   summary: string;
   paragraphs: string[];
   mediumUrl: string;
+  platformLabel?: string;
 }
 
 const BLOG_POSTS: BlogPost[] = [
+  {
+    id: "blockchain-anchored-tokenization",
+    title: "Blockchain-Anchored Tokenization",
+    date: "June 12, 2025",
+    readingTime: "4 min read",
+    tags: ["Blockchain", "Tokenization", "Web3", "Security"],
+    author: {
+      name: "Sheikh Sajid",
+      username: "@sheikhsajid69",
+      avatar: "/s4jid_avatar.png",
+      mediumUrl: "https://ephemeral-trust.hashnode.dev/blockchain-anchored-tokenization",
+    },
+    coverImage: "/blog/blockchain-tokenization.png",
+    summary:
+      "An analysis of blockchain-anchored tokenization frameworks, decentralized trust mechanisms, and immutable digital asset representation.",
+    paragraphs: [
+      "Tokenization has evolved far beyond simple cryptocurrency transactions. At its core, blockchain-anchored tokenization creates an immutable cryptographic link between real-world assets, digital rights, and verifiable ledger states.",
+      "By establishing ephemeral trust models backed by distributed consensus, systems can programmatically enforce ownership, auditability, and liquidity without relying on single-point centralized intermediaries.",
+      "As decentralized protocols mature, anchoring tokenized contracts onto resilient blockchain layers ensures tamper-proof audit trails, verifiable provenance, and programmable asset exchange for modern Web3 infrastructure.",
+    ],
+    mediumUrl: "https://ephemeral-trust.hashnode.dev/blockchain-anchored-tokenization",
+    platformLabel: "Read on Hashnode",
+  },
+  {
+    id: "aeye",
+    title: "AEye is watching you!",
+    date: "May 6, 2025",
+    readingTime: "3 min read",
+    tags: ["Tech", "Privacy", "AI"],
+    author: {
+      name: "Sheikh Sajid",
+      username: "@sheikhsajid69",
+      avatar: "/s4jid_avatar.png",
+      mediumUrl: "https://medium.com/@sheikhsajid69",
+    },
+    coverImage: "/blog/aeye.jpeg",
+    summary:
+      "Adapting to the modern internet has connected us more than ever—but is the pervasive digital eye tracking our every second?",
+    paragraphs: [
+      "Past in the 90’s there was only a limited source of data, no one knows how to collect data, how to utilize it? the revolution in tech gave rise to this new AEye concept. Adapting the tech and going online made people do smart work, efficient, utilities, backups for everything. We search everything from Google, we watch content everything on YouTube, we showcasing our social life on Instagram & Facebook, we chat online from WhatsApp.",
+      "Question isn’t that a matter of realizing that the apps or web we’re using are been pawned every second, every app needs data from us. What is it which is making every second to be addict to the tech, How are you getting notifications to your related, how do they know you exactly, Either by knowingly of or unknowingly they’re for capturing your personal data somehow. Every smart mobile phone is active and it listens to everything even when it is off, the suggestions which we receive on every app is knowingly madeup from by our processed data they collected, They’ll gain more and more interaction and engagement of our time, they also sell our sensitive data to other major apps.",
+      "We’re trying to make our life private but it will never be if we’re using tech, Big tech and Fortune 500 companies use the data for training their AI models and make the model opensource to gain even more data and build far better application in future. We humans nowadays rely everything on tech, web, app, AI very much whether to research, stalk, watch content, play online, online payments, social connections, tech works, sharing stuffs is all been handled by tech. And we’re just throwing our data directly to the tech, trusting blindly on this apps, paying dollars to go verified or private doesn’t help such for. Even the servers, VPN, incognito isn’t good for privacy space, they’ll have even better access to your private data and works. Every tech company’s terms and conditions is directly stated to have your all data and utilize for there own use, and we still ignore that message, the reason why we ignore is just we’re lazy for reading in length and we left the focus of patience back before a decade itself.",
+      "AEye is nothing but a word stated that an eye or AI is pointing your data, you’ve been pawned by fancy tech, following the trends, FOMO, relying on that made this happening. Being stick to tech is a bookworm who’s trying to consume the data but unknowingly the provider consumes all the data."
+    ],
+    mediumUrl: "https://medium.com/@sheikhsajid69/aeye-is-watching-you-732a55965da5",
+    platformLabel: "Read on Medium",
+  },
   {
     id: "ai-no-code",
     title: "AI role in no-code tools?",
@@ -45,29 +93,7 @@ const BLOG_POSTS: BlogPost[] = [
       "Simple conclusion: AI = copy (from internet) + paste (on screen);"
     ],
     mediumUrl: "https://medium.com/@sheikhsajid69/ai-role-in-no-code-tools-0d8bb791bc2f",
-  },
-  {
-    id: "aeye",
-    title: "AEye is watching you!",
-    date: "May 6, 2025",
-    readingTime: "3 min read",
-    tags: ["Tech", "Privacy", "AI"],
-    author: {
-      name: "Sheikh Sajid",
-      username: "@sheikhsajid69",
-      avatar: "/s4jid_avatar.png",
-      mediumUrl: "https://medium.com/@sheikhsajid69",
-    },
-    coverImage: "/blog/aeye.jpeg",
-    summary:
-      "Adapting to the modern internet has connected us more than ever—but is the pervasive digital eye tracking our every second?",
-    paragraphs: [
-      "Past in the 90’s there was only a limited source of data, no one knows how to collect data, how to utilize it? the revolution in tech gave rise to this new AEye concept. Adapting the tech and going online made people do smart work, efficient, utilities, backups for everything. We search everything from Google, we watch content everything on YouTube, we showcasing our social life on Instagram & Facebook, we chat online from WhatsApp.",
-      "Question isn’t that a matter of realizing that the apps or web we’re using are been pawned every second, every app needs data from us. What is it which is making every second to be addict to the tech, How are you getting notifications to your related, how do they know you exactly, Either by knowingly of or unknowingly they’re for capturing your personal data somehow. Every smart mobile phone is active and it listens to everything even when it is off, the suggestions which we receive on every app is knowingly madeup from by our processed data they collected, They’ll gain more and more interaction and engagement of our time, they also sell our sensitive data to other major apps.",
-      "We’re trying to make our life private but it will never be if we’re using tech, Big tech and Fortune 500 companies use the data for training their AI models and make the model opensource to gain even more data and build far better application in future. We humans nowadays rely everything on tech, web, app, AI very much whether to research, stalk, watch content, play online, online payments, social connections, tech works, sharing stuffs is all been handled by tech. And we’re just throwing our data directly to the tech, trusting blindly on this apps, paying dollars to go verified or private doesn’t help such for. Even the servers, VPN, incognito isn’t good for privacy space, they’ll have even better access to your private data and works. Every tech company’s terms and conditions is directly stated to have your all data and utilize for there own use, and we still ignore that message, the reason why we ignore is just we’re lazy for reading in length and we left the focus of patience back before a decade itself.",
-      "AEye is nothing but a word stated that an eye or AI is pointing your data, you’ve been pawned by fancy tech, following the trends, FOMO, relying on that made this happening. Being stick to tech is a bookworm who’s trying to consume the data but unknowingly the provider consumes all the data."
-    ],
-    mediumUrl: "https://medium.com/@sheikhsajid69/aeye-is-watching-you-732a55965da5",
+    platformLabel: "Read on Medium",
   },
 ];
 
@@ -230,7 +256,7 @@ export default function BlogPage() {
                   rel="noreferrer"
                   className="text-xs text-white/45 hover:text-white transition"
                 >
-                  Medium: {activePost.author.username}
+                  {activePost.mediumUrl.includes("hashnode") ? "Hashnode: " : "Medium: "}{activePost.author.username}
                 </a>
               </div>
             </div>
@@ -301,7 +327,7 @@ export default function BlogPage() {
               rel="noreferrer"
               className="glass-button text-xs font-semibold uppercase tracking-wider py-2.5 px-4 inline-flex items-center gap-2"
             >
-              <span>Read on Medium</span>
+              <span>{activePost.platformLabel || "Read Article"}</span>
               <ExternalLink size={13} />
             </a>
           </div>
