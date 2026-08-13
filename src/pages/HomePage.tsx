@@ -6,7 +6,6 @@ import { BlurText } from "../components/BlurText";
 import { SocialPill } from "../components/SocialPill";
 import { GitHubIcon, LinkedInIcon, LeetCodeIcon, XIcon } from "../components/BrandIcons";
 import { socialLinks } from "../content";
-import BlackHole from "../components/BlackHole";
 
 const socialIconMap: Record<string, React.ReactNode> = {
   GitHub: <GitHubIcon className="h-[18px] w-[18px]" />,
@@ -37,8 +36,6 @@ export default function HomePage() {
 
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pb-16 pt-28 text-center md:px-6">
-      <BlackHole />
-
       <div className="relative z-10 flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
