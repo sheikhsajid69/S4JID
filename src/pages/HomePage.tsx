@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowDown, Mail } from "lucide-react";
+import { ArrowRight, ArrowDown, Mail, FileText } from "lucide-react";
 import { BlurText } from "../components/BlurText";
 import { SocialPill } from "../components/SocialPill";
 import { GitHubIcon, LinkedInIcon, LeetCodeIcon, XIcon } from "../components/BrandIcons";
@@ -93,6 +93,15 @@ export default function HomePage() {
             View Projects
             <ArrowRight size={16} />
           </Link>
+          <a
+            href="https://resume.sheikhsajid69.qzz.io"
+            target="_blank"
+            rel="noreferrer"
+            className="glass-button"
+          >
+            Resume
+            <FileText size={16} />
+          </a>
           <Link to="/contact" className="glass-button-alt">
             Get In Touch
             <Mail size={16} />
