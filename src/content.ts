@@ -243,6 +243,7 @@ export const projects: Project[] = [
     href: "https://github.com/sheikhsajid69/graphs-from-google-form-responses",
     ctaLabel: "GitHub",
     meta: "Form responses to presentation charts",
+    website: "https://graph.sheikhsajid69.qzz.io",
   },
   {
     name: "Auto-Mute Ad Blocker",
