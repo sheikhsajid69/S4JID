@@ -227,6 +227,16 @@ export const skillGroups: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    name: "LANDSYNC AI (SIH26018)",
+    description:
+      "Intelligent land record digitalisation, multi-jurisdiction consistency validation, cadastral GIS spatial verification, and human-in-the-loop review platform developed for Smart India Hackathon 2026.",
+    tags: ["Python", "FastAPI", "Next.js", "AI", "PostGIS", "GovTech"],
+    href: "https://github.com/sheikhsajid69/SIH26018",
+    ctaLabel: "GitHub",
+    meta: "Smart India Hackathon 2026 • SIH26018",
+    website: "https://sih26018.sheikhsajid69.qzz.io",
+  },
+  {
     name: "Claude Code Toon-Skill",
     description:
       "Token-Oriented Object Notation (TOON) prompt compression plugin for Claude Code and AI coding assistants. Reduces prompt token consumption by 30-60% while maintaining unambiguous instruction structure.",
