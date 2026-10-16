@@ -227,6 +227,16 @@ export const skillGroups: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    name: "SUN-LLM",
+    description:
+      "Autonomous multi-turn inference engine and bounded context orchestrator engineered for open-weight LLMs. Features asynchronous non-blocking I/O, polymorphic provider abstraction (Ollama & Hugging Face), and deterministic context bounding.",
+    tags: ["Python", "FastAPI", "LLMs", "Docker", "Open Source"],
+    href: "https://github.com/sheikhsajid69/sun-llm",
+    ctaLabel: "GitHub",
+    meta: "Autonomous inference engine & context orchestrator",
+    website: "https://sun-llm.onrender.com/",
+  },
+  {
     name: "LANDSYNC AI (SIH26018)",
     description:
       "Intelligent land record digitalisation, multi-jurisdiction consistency validation, cadastral GIS spatial verification, and human-in-the-loop review platform developed for Smart India Hackathon 2026.",
