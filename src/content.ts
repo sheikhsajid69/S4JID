@@ -227,6 +227,16 @@ export const skillGroups: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    name: "LangCraft",
+    description:
+      "Enterprise-grade Indic DOCX-to-PDF rendering and document intelligence engine. Solves systemic typographic collapse across Indian languages using in-memory OOXML normalization and HarfBuzz complex text layout shaping.",
+    tags: ["TypeScript", "Next.js", "OpenType", "HarfBuzz", "Playwright", "DevTools"],
+    href: "https://github.com/sheikhsajid69/langcraft",
+    ctaLabel: "GitHub",
+    meta: "Indic DOCX-to-PDF Conversion Engine",
+    website: "https://lc.sheikhsajid69.qzz.io/",
+  },
+  {
     name: "SUN-LLM",
     description:
       "Autonomous multi-turn inference engine and bounded context orchestrator engineered for open-weight LLMs. Features asynchronous non-blocking I/O, polymorphic provider abstraction (Ollama & Hugging Face), and deterministic context bounding.",
