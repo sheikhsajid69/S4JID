@@ -8,6 +8,26 @@ export type Stat = {
   label: string;
 };
 
+export type GitfutAttribute = {
+  key: string;
+  label: string;
+  value: number;
+  description: string;
+};
+
+export type GitfutProfile = {
+  username: string;
+  handle: string;
+  overall: number;
+  position: string;
+  positionFull: string;
+  cardTier: string;
+  primaryLanguage: string;
+  cardImage: string;
+  profileUrl: string;
+  attributes: GitfutAttribute[];
+};
+
 export type Experience = {
   role: string;
   company: string;
@@ -64,6 +84,26 @@ export const stats: Stat[] = [
   { value: "1M+", label: "Users Served" },
   { value: "$5M+", label: "Revenue Generated" },
 ];
+
+export const gitfutProfile: GitfutProfile = {
+  username: "S4JID",
+  handle: "@sheikhsajid69",
+  overall: 76,
+  position: "ST",
+  positionFull: "Striker / Lead Builder",
+  cardTier: "Gold Card",
+  primaryLanguage: "TypeScript (TS)",
+  cardImage: "/gitfut-stats.png",
+  profileUrl: "https://gitfut.com/sheikhsajid69",
+  attributes: [
+    { key: "DRI", label: "Dribbling", value: 81, description: "Engineering agility & versatility" },
+    { key: "SHO", label: "Shooting", value: 79, description: "Execution velocity & shipped builds" },
+    { key: "PAC", label: "Pace", value: 72, description: "Sprint cadence & turnaround speed" },
+    { key: "PHY", label: "Physical", value: 72, description: "Founder resilience & system stamina" },
+    { key: "PAS", label: "Passing", value: 66, description: "Cross-functional collaboration & mentorship" },
+    { key: "DEF", label: "Defending", value: 45, description: "System safeguards & fault tolerance" },
+  ],
+};
 
 export const experiences: Experience[] = [
   {
