@@ -267,6 +267,15 @@ export const skillGroups: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    name: "OpenWPS",
+    description:
+      "Production-grade, memory-safe replica of the WPS Office Suite engineered in Rust, WebAssembly, Python, and Tauri 2.0. Features a unified zero-copy vector canvas pipeline, embedded data science workflows, and the Mercury Design System.",
+    tags: ["Rust", "WebAssembly", "Tauri", "React", "Python", "DevTools"],
+    href: "https://github.com/veronica-medusa/MPS",
+    ctaLabel: "GitHub",
+    meta: "Next-Gen Pinpoint Precision Office Suite",
+  },
+  {
     name: "LangCraft",
     description:
       "Enterprise-grade Indic DOCX-to-PDF rendering and document intelligence engine. Solves systemic typographic collapse across Indian languages using in-memory OOXML normalization and HarfBuzz complex text layout shaping.",
