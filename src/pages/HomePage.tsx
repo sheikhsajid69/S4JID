@@ -47,7 +47,7 @@ export default function HomePage() {
           Available for collaborations
         </motion.div>
 
-        <h1 className="mt-8 font-display text-[5rem] italic leading-[0.88] tracking-[-0.08em] text-white sm:text-[7rem] md:text-[9rem] lg:text-[12rem]">
+        <h1 className="mt-8 font-display text-[4.25rem] italic leading-[0.88] tracking-[-0.08em] text-white sm:text-[6.5rem] md:text-[9rem] lg:text-[12rem]">
           <BlurText text="S4JID" delay={0.2} wordDelay={0.12} forceAnimate />
         </h1>
 
@@ -55,7 +55,7 @@ export default function HomePage() {
           <BlurText text="Systems Builder · AI Engineer · Technical Founder" delay={0.6} wordDelay={0.06} forceAnimate />
         </p>
 
-        <p className="mx-auto mt-6 max-w-lg text-sm leading-7 text-white/50 md:text-base">
+        <p className="mx-auto mt-6 max-w-lg text-sm font-normal leading-7 text-white/70 md:text-base">
           Full-stack engineer, technical entrepreneur, and open-source builder based in Bangalore, India.
         </p>
 
@@ -80,11 +80,11 @@ export default function HomePage() {
             />
           </div>
           <div
-            className="absolute -bottom-2 -right-2 flex items-center gap-2 rounded-full border border-white/12 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.28em] text-white/70"
-            style={{ background: "rgba(15,15,24,0.85)", backdropFilter: "blur(8px)" }}
+            className="bangalore-pill absolute -bottom-2 -right-2 flex items-center gap-2 rounded-full border border-white/12 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.28em]"
+            style={{ background: "rgba(15,15,24,0.92)", color: "#ffffff", backdropFilter: "blur(8px)" }}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#dd5b00] shadow-[0_0_8px_rgba(221,91,0,1)]" />
-            Bangalore
+            <span style={{ color: "#ffffff" }} className="!text-white font-medium">Bangalore</span>
           </div>
         </div>
 

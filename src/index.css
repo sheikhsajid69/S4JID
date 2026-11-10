@@ -479,10 +479,10 @@ button {
 
 .reveal-item {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(16px);
   transition:
-    opacity 760ms var(--ease),
-    transform 760ms var(--ease);
+    opacity 300ms var(--ease),
+    transform 300ms var(--ease);
 }
 
 .reveal-item.is-visible {
@@ -859,4 +859,232 @@ button {
     padding-top: 72px;
   }
 }
+
+/* ─── Paper Light Matrix Theme ─── */
+.theme-paper-light {
+  color-scheme: light;
+  background-color: #f7f7f5 !important;
+  color: #0d0d0d !important;
+}
+
+/* Headings and primary titles */
+.theme-paper-light h1,
+.theme-paper-light h2,
+.theme-paper-light h3,
+.theme-paper-light h4,
+.theme-paper-light h5,
+.theme-paper-light h6,
+.theme-paper-light .font-display {
+  color: #0d0d0d !important;
+}
+
+/* Base text-white and light text classes */
+.theme-paper-light .text-white,
+.theme-paper-light .text-\[\#f0f0f5\] {
+  color: #0d0d0d !important;
+}
+
+/* Opacity variants of text-white */
+.theme-paper-light [class*="text-white\/"] {
+  color: rgba(13, 13, 13, 0.74) !important;
+}
+
+.theme-paper-light [class*="text-white\/7"],
+.theme-paper-light [class*="text-white\/8"],
+.theme-paper-light [class*="text-white\/9"] {
+  color: rgba(13, 13, 13, 0.88) !important;
+}
+
+.theme-paper-light [class*="text-white\/5"],
+.theme-paper-light [class*="text-white\/6"] {
+  color: rgba(13, 13, 13, 0.72) !important;
+}
+
+.theme-paper-light [class*="text-white\/3"],
+.theme-paper-light [class*="text-white\/4"] {
+  color: rgba(13, 13, 13, 0.6) !important;
+}
+
+/* EXCEPTION: Bangalore badge text MUST stay white! */
+.bangalore-pill,
+.bangalore-pill *,
+.theme-paper-light .bangalore-pill,
+.theme-paper-light .bangalore-pill * {
+  color: #ffffff !important;
+}
+
+/* Experience grid typography */
+.theme-paper-light .exp-grid__title {
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .exp-grid__company {
+  color: rgba(13, 13, 13, 0.8) !important;
+}
+
+.theme-paper-light .exp-grid__highlights li {
+  color: rgba(13, 13, 13, 0.74) !important;
+}
+
+.theme-paper-light .exp-grid__eyebrow {
+  color: rgba(13, 13, 13, 0.52) !important;
+}
+
+/* Git Timeline elements */
+.theme-paper-light .git-timeline__bullet,
+.theme-paper-light .git-timeline__node {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .git-timeline__bullet--active,
+.theme-paper-light .git-timeline__node--active {
+  border-color: #dd5b00 !important;
+  color: #dd5b00 !important;
+}
+
+.theme-paper-light .git-timeline__line {
+  background: rgba(0, 0, 0, 0.12) !important;
+}
+
+.theme-paper-light .git-timeline__item--active .git-timeline__line {
+  background: linear-gradient(180deg, #dd5b00 0%, rgba(0, 0, 0, 0.12) 100%) !important;
+}
+
+.theme-paper-light .git-timeline__logo {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Cards & Glass panels */
+.theme-paper-light .glass-panel,
+.theme-paper-light .glass-subcard,
+.theme-paper-light article,
+.theme-paper-light .git-timeline__body,
+.theme-paper-light .exp-grid__card,
+.theme-paper-light .project-card {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.theme-paper-light .glass-panel::before {
+  display: none !important;
+}
+
+.theme-paper-light .hairline,
+.theme-paper-light .border-white\/10,
+.theme-paper-light .border-white\/12 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.theme-paper-light .bg-white\/8,
+.theme-paper-light .bg-white\/6,
+.theme-paper-light .bg-white\/10,
+.theme-paper-light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Badges & Pills */
+.theme-paper-light .tag-pill,
+.theme-paper-light .skill-pill,
+.theme-paper-light .skill-glyph,
+.theme-paper-light .achievement-badge {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .tag-pill *,
+.theme-paper-light .skill-pill *,
+.theme-paper-light .achievement-badge * {
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .stat-pill {
+  box-shadow: var(--shadow-1), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Inputs */
+.theme-paper-light .notion-input {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .notion-input::placeholder {
+  color: rgba(13, 13, 13, 0.4) !important;
+}
+
+/* Buttons */
+.theme-paper-light .glass-button {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .glass-button:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+}
+
+.theme-paper-light .glass-button-alt {
+  background: #0d0d0d !important;
+  color: #ffffff !important;
+}
+
+.theme-paper-light .glass-button-disabled {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: rgba(13, 13, 13, 0.38) !important;
+}
+
+.theme-paper-light .social-pill {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.theme-paper-light .social-pill:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.theme-paper-light .social-pill span {
+  color: #0d0d0d !important;
+}
+
+.theme-paper-light .glass-icon-button {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: rgba(13, 13, 13, 0.72) !important;
+}
+
+.theme-paper-light .glass-icon-button:hover {
+  color: #000000 !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Header & Nav */
+.header-glass-bar[data-liquid-glass="material"] {
+  display: block !important;
+  width: 100% !important;
+}
+
+.theme-paper-light .header-glass-bar[data-liquid-glass="material"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.theme-paper-light .nav-link {
+  color: rgba(13, 13, 13, 0.72) !important;
+}
+
+.theme-paper-light .nav-link:hover,
+.theme-paper-light .nav-link.text-white {
+  color: #000000 !important;
+}
+
+
 

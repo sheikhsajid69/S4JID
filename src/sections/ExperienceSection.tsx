@@ -30,7 +30,7 @@ export default function ExperienceSection() {
                 <article
                   data-reveal
                   className="exp-grid__card reveal-item glass-panel"
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  style={{ transitionDelay: `${index * 60}ms` }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="space-y-1">
@@ -102,7 +102,7 @@ export default function ExperienceSection() {
                 <article
                   data-reveal
                   className="exp-grid__card reveal-item glass-panel"
-                  style={{ transitionDelay: `${(index + 3) * 100}ms` }}
+                  style={{ transitionDelay: `${index * 60}ms` }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="space-y-1">

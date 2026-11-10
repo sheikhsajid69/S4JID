@@ -28,24 +28,25 @@ export function BlurText({
   return (
     <span ref={ref} className={className}>
       {units.map((unit, index) => (
-        <motion.span
-          key={`${unit}-${index}`}
-          className="inline-block"
-          initial={{ opacity: 0, y: 32 }}
-          animate={
-            shouldAnimate
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 32 }
-          }
-          transition={{
-            duration: 0.7,
-            ease: [0.23, 1, 0.32, 1],
-            delay: delay + index * wordDelay,
-          }}
-        >
-          {unit === " " ? "\u00A0" : unit}
-          {segment === "words" && index < units.length - 1 ? "\u00A0" : ""}
-        </motion.span>
+        <span key={`${unit}-${index}`}>
+          <motion.span
+            className="inline-block"
+            initial={{ opacity: 0, y: 32 }}
+            animate={
+              shouldAnimate
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 32 }
+            }
+            transition={{
+              duration: 0.7,
+              ease: [0.23, 1, 0.32, 1],
+              delay: delay + index * wordDelay,
+            }}
+          >
+            {unit}
+          </motion.span>
+          {segment === "words" && index < units.length - 1 ? " " : ""}
+        </span>
       ))}
     </span>
   );
