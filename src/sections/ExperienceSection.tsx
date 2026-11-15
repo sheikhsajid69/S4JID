@@ -78,12 +78,19 @@ export default function ExperienceSection() {
         <div className="exp-grid__col exp-grid__col--center">
           <div className="exp-grid__image-wrap">
             <div className="exp-grid__image-glow" />
-            <img
-              src="/s4jid_experience.png"
-              alt="Sheikh Sajid"
-              className="exp-grid__image"
-              loading="lazy"
-            />
+            <div className="exp-grid__image-card">
+              <picture>
+                <source srcSet="/portrait_dotted_halftone.png" type="image/png" />
+                <img
+                  src="/portrait_dotted_halftone.svg"
+                  alt="Sheikh Sajid - Dotted Halftone Portrait"
+                  className="exp-grid__image"
+                  loading="lazy"
+                  width={880}
+                  height={880}
+                />
+              </picture>
+            </div>
           </div>
         </div>
 

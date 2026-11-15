@@ -610,10 +610,10 @@ button {
   margin-right: 0.5em;
 }
 
-/* Center image */
+/* Center portrait card */
 .exp-grid__image-wrap {
   position: relative;
-  width: clamp(14rem, 18vw, 18rem);
+  width: clamp(14.5rem, 18.5vw, 18.5rem);
   animation: exp-float 8s ease-in-out infinite;
 }
 
@@ -624,26 +624,67 @@ button {
 
 .exp-grid__image-glow {
   position: absolute;
-  inset: -1.5rem;
+  inset: -1.75rem;
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
-    rgba(221, 91, 0, 0.18),
+    rgba(221, 91, 0, 0.20),
     transparent 70%
   );
-  filter: blur(30px);
+  filter: blur(36px);
   pointer-events: none;
+  z-index: 0;
+}
+
+.exp-grid__image-card {
+  position: relative;
+  z-index: 1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 24px 60px -12px rgba(0, 0, 0, 0.7),
+    0 4px 16px -2px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.exp-grid__image-card:hover {
+  transform: scale(1.02);
 }
 
 .exp-grid__image {
+  display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  object-position: top center;
-  border-radius: 1rem;
-  position: relative;
-  z-index: 1;
-  filter: contrast(1.04) brightness(0.94);
+  filter: contrast(1.02) brightness(0.94);
+  transition: filter 0.3s ease;
+}
+
+/* Halftone portrait in light mode */
+.theme-paper-light .exp-grid__image-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(221, 91, 0, 0.12),
+    transparent 70%
+  );
+  filter: blur(32px);
+}
+
+.theme-paper-light .exp-grid__image-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  box-shadow: 
+    0 20px 48px -12px rgba(0, 0, 0, 0.08),
+    0 4px 12px -2px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+}
+
+.theme-paper-light .exp-grid__image {
+  filter: none;
 }
 
 /* Mobile: collapse to single column */
@@ -673,12 +714,43 @@ button {
   .exp-grid__col--center {
     order: -1;
     position: static;
+    margin: 0 auto 0.5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   .exp-grid__image-wrap {
-    width: min(60%, 16rem);
+    width: clamp(8.5rem, 36vw, 10.5rem);
     margin: 0 auto;
+    animation: exp-float-mobile 6s ease-in-out infinite;
   }
+
+  .exp-grid__image-glow {
+    inset: -1rem;
+    filter: blur(20px);
+  }
+
+  .exp-grid__image-card {
+    border-radius: 1.25rem;
+    box-shadow: 
+      0 14px 32px -6px rgba(0, 0, 0, 0.5),
+      0 2px 6px -1px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  }
+
+  .theme-paper-light .exp-grid__image-card {
+    box-shadow: 
+      0 12px 28px -6px rgba(0, 0, 0, 0.08),
+      0 2px 6px -1px rgba(0, 0, 0, 0.03),
+      0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  }
+}
+
+@keyframes exp-float-mobile {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 /* ─── Git-Style Timeline (Education) ─── */
