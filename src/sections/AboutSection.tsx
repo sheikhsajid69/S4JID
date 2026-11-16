@@ -108,6 +108,8 @@ export default function AboutSection() {
                 alt="S4JID GitFUT Developer Card"
                 width={674}
                 height={1024}
+                loading="lazy"
+                decoding="async"
                 className="relative z-10 w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
                 style={{
                   filter: "drop-shadow(0 15px 30px rgba(245, 158, 11, 0.25))",
@@ -194,6 +196,7 @@ export default function AboutSection() {
             alt="3D Contribution Chart"
             className="max-h-[360px] w-full max-w-4xl h-auto object-contain"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

@@ -145,6 +145,14 @@ export default function App() {
 
   return (
     <div className={`relative min-h-screen overflow-x-clip ${bgMode === "matrix-light" ? "theme-paper-light bg-[#f7f7f5] text-[#0d0d0d]" : "bg-[#0a0a0f] text-[#f0f0f5]"}`}>
+      {/* Skip Link for Keyboard Accessibility (WCAG 2.4.1) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-full focus:shadow-2xl focus:ring-2 focus:ring-[#dd5b00] text-xs font-semibold uppercase tracking-wider"
+      >
+        Skip to main content
+      </a>
+
       {/* Background Layer: Dot-Matrix Reaching Hands or Video */}
       <div className={`pointer-events-none fixed inset-0 z-0 overflow-hidden ${bgMode === "matrix-light" ? "bg-[#f7f7f5]" : "bg-[#0a0a0f]"}`}>
         {bgMode === "video" ? (
@@ -182,7 +190,7 @@ export default function App() {
               border: bgMode === "matrix-light" ? "1px solid rgba(0, 0, 0, 0.12)" : "1px solid rgba(255, 255, 255, 0.14)",
             }}
           >
-            <nav className="w-full flex items-center justify-between gap-3 px-3.5 py-2 sm:px-5 sm:py-2.5 md:px-6 md:gap-4 lg:gap-6">
+            <nav aria-label="Main Navigation" className="w-full flex items-center justify-between gap-3 px-3.5 py-2 sm:px-5 sm:py-2.5 md:px-6 md:gap-4 lg:gap-6">
               {/* Logo container */}
               <div className="flex shrink-0 items-center">
                 <Link to="/" className="flex items-center gap-2 sm:gap-2.5">
@@ -356,7 +364,7 @@ export default function App() {
       </header>
 
       {/* Routes */}
-      <main className="relative z-10">
+      <main id="main-content" tabIndex={-1} className="relative z-10 outline-none">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />

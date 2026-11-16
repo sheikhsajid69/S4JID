@@ -77,6 +77,17 @@ body,
   min-height: 100%;
 }
 
+html {
+  scrollbar-color: rgba(124, 92, 252, 0.6) transparent;
+  scrollbar-width: thin;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -84,8 +95,41 @@ body {
   color: var(--text-main);
   font-family: var(--font-sans);
   overflow-x: clip;
+  overscroll-behavior-y: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Modern Typography (improve-text-layout-and-legibility) */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li, blockquote {
+  text-wrap: pretty;
+}
+
+/* Modern Accessibility Focus Indicators (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Modern Web Performance: Defer off-screen rendering (defer-rendering-heavy-content) */
+.exp-grid__card,
+.project-card,
+.git-timeline__item,
+.achievement-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 280px;
 }
 
 a {
@@ -414,8 +458,17 @@ button {
   box-shadow:
     var(--shadow-1),
     0 0 0 1px rgba(124,92,252,0.18);
-
   outline: none;
+}
+
+/* Modern Form Validation Feedback (validate-input-after-interaction) */
+.notion-input:user-invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 1px #ef4444, 0 0 12px rgba(239, 68, 68, 0.25) !important;
+}
+
+.notion-input:user-valid:not(:placeholder-shown) {
+  border-color: rgba(34, 197, 94, 0.6) !important;
 }
 
 .notion-input::placeholder {
@@ -614,7 +667,12 @@ button {
 .exp-grid__image-wrap {
   position: relative;
   width: clamp(14.5rem, 18.5vw, 18.5rem);
-  animation: exp-float 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .exp-grid__image-wrap {
+    animation: exp-float 8s ease-in-out infinite;
+  }
 }
 
 @keyframes exp-float {
@@ -724,7 +782,12 @@ button {
   .exp-grid__image-wrap {
     width: clamp(8.5rem, 36vw, 10.5rem);
     margin: 0 auto;
-    animation: exp-float-mobile 6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .exp-grid__image-wrap {
+      animation: exp-float-mobile 6s ease-in-out infinite;
+    }
   }
 
   .exp-grid__image-glow {

@@ -54,15 +54,25 @@ export default function ContactSection() {
           ))}
         </div>
 
-        <form className="mt-10 grid gap-4 md:grid-cols-2" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="mt-10 grid gap-4 md:grid-cols-2"
+          onSubmit={(event) => {
+            event.preventDefault();
+            window.location.href = mailtoHref;
+          }}
+        >
           <div className="flex flex-col gap-2">
             <label
+              htmlFor="contact-name"
               className="text-xs font-semibold uppercase text-white/40"
               style={{ letterSpacing: "0.125px" }}
             >
               Name
             </label>
             <input
+              id="contact-name"
+              name="name"
+              autoComplete="name"
               className="notion-input w-full"
               type="text"
               placeholder="Your name"
@@ -77,12 +87,17 @@ export default function ContactSection() {
           </div>
           <div className="flex flex-col gap-2">
             <label
+              htmlFor="contact-email"
               className="text-xs font-semibold uppercase text-white/40"
               style={{ letterSpacing: "0.125px" }}
             >
               Email
             </label>
             <input
+              id="contact-email"
+              name="email"
+              autoComplete="email"
+              required
               className="notion-input w-full"
               type="email"
               placeholder="Your email"
@@ -97,12 +112,16 @@ export default function ContactSection() {
           </div>
           <div className="flex flex-col gap-2 md:col-span-2">
             <label
+              htmlFor="contact-message"
               className="text-xs font-semibold uppercase text-white/40"
               style={{ letterSpacing: "0.125px" }}
             >
               Message
             </label>
             <textarea
+              id="contact-message"
+              name="message"
+              required
               className="notion-input w-full"
               rows={5}
               placeholder="Your message"
@@ -116,10 +135,10 @@ export default function ContactSection() {
             />
           </div>
           <div className="md:col-span-2 flex justify-center">
-            <a href={mailtoHref} className="glass-button">
+            <button type="submit" className="glass-button cursor-pointer">
               <Send size={16} />
               Send Message
-            </a>
+            </button>
           </div>
         </form>
       </div>

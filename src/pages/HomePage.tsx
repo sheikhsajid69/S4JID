@@ -75,6 +75,8 @@ export default function HomePage() {
               alt="Sheikh Sajid"
               width={160}
               height={160}
+              {...{ fetchpriority: "high" }}
+              decoding="async"
               className="block h-40 w-40 object-cover object-top"
               style={{ filter: "contrast(1.05) brightness(0.96)" }}
             />

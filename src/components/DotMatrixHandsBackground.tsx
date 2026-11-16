@@ -312,25 +312,47 @@ export default function DotMatrixHandsBackground({
     let startTime: number | null = null;
     let isPaused = false;
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let isReducedMotion = prefersReducedMotion.matches;
+
     function loop(timestamp: number) {
       if (!startTime) startTime = timestamp;
-      if (!isPaused) {
+      if (!isPaused && !isReducedMotion) {
         const elapsedSec = (timestamp - startTime) * 0.001;
         render(elapsedSec);
       }
-      animId = requestAnimationFrame(loop);
+      if (!isReducedMotion) {
+        animId = requestAnimationFrame(loop);
+      }
     }
 
-    animId = requestAnimationFrame(loop);
+    if (isReducedMotion) {
+      render(0);
+    } else {
+      animId = requestAnimationFrame(loop);
+    }
 
     const handleVisibility = () => {
       isPaused = document.hidden;
     };
     document.addEventListener("visibilitychange", handleVisibility);
 
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      isReducedMotion = e.matches;
+      if (isReducedMotion) {
+        if (animId !== null) cancelAnimationFrame(animId);
+        render(0);
+      } else {
+        startTime = null;
+        animId = requestAnimationFrame(loop);
+      }
+    };
+    prefersReducedMotion.addEventListener("change", handleMotionChange);
+
     return () => {
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibility);
+      prefersReducedMotion.removeEventListener("change", handleMotionChange);
       if (animId !== null) {
         cancelAnimationFrame(animId);
       }
