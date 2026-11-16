@@ -88,20 +88,20 @@ export const stats: Stat[] = [
 export const gitfutProfile: GitfutProfile = {
   username: "S4JID",
   handle: "@sheikhsajid69",
-  overall: 76,
+  overall: 77,
   position: "ST",
-  positionFull: "Striker / Lead Builder",
-  cardTier: "Gold Card",
+  positionFull: "Striker / Fantasista",
+  cardTier: "IN-FORM",
   primaryLanguage: "TypeScript (TS)",
   cardImage: "/gitfut-stats.png",
   profileUrl: "https://gitfut.com/sheikhsajid69",
   attributes: [
-    { key: "DRI", label: "Dribbling", value: 81, description: "Engineering agility & versatility" },
-    { key: "SHO", label: "Shooting", value: 79, description: "Execution velocity & shipped builds" },
-    { key: "PAC", label: "Pace", value: 72, description: "Sprint cadence & turnaround speed" },
+    { key: "DRI", label: "Dribbling", value: 82, description: "Engineering agility & versatility (7 languages across 46 repos)" },
+    { key: "SHO", label: "Shooting", value: 78, description: "Execution velocity & shipped PR impact" },
     { key: "PHY", label: "Physical", value: 72, description: "Founder resilience & system stamina" },
+    { key: "PAC", label: "Pace", value: 71, description: "Sprint cadence & turnaround speed" },
     { key: "PAS", label: "Passing", value: 66, description: "Cross-functional collaboration & mentorship" },
-    { key: "DEF", label: "Defending", value: 45, description: "System safeguards & fault tolerance" },
+    { key: "DEF", label: "Defending", value: 46, description: "System safeguards & fault tolerance" },
   ],
 };
 

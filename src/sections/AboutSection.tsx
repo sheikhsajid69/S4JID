@@ -102,17 +102,17 @@ export default function AboutSection() {
               className="group relative block w-full max-w-[250px] transition-transform duration-500 hover:scale-[1.03]"
               title="View card on GitFUT"
             >
-              <div className="absolute -inset-4 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.22),transparent_70%)] blur-2xl pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-70" />
+              <div className="absolute -inset-4 rounded-3xl bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.24),rgba(245,158,11,0.2),transparent_70%)] blur-2xl pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-75" />
               <img
                 src={gitfutProfile.cardImage}
                 alt="S4JID GitFUT Developer Card"
-                width={674}
-                height={1024}
+                width={996}
+                height={1512}
                 loading="lazy"
                 decoding="async"
                 className="relative z-10 w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
                 style={{
-                  filter: "drop-shadow(0 15px 30px rgba(245, 158, 11, 0.25))",
+                  filter: "drop-shadow(0 15px 30px rgba(59, 130, 246, 0.28)) drop-shadow(0 8px 20px rgba(245, 158, 11, 0.2))",
                 }}
               />
             </a>
@@ -136,6 +136,9 @@ export default function AboutSection() {
               <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
                 {gitfutProfile.overall} OVR • {gitfutProfile.cardTier}
               </span>
+              <span className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs font-semibold text-purple-300">
+                Archetype: Fantasista
+              </span>
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
                 Position: {gitfutProfile.position} ({gitfutProfile.positionFull})
               </span>
@@ -145,7 +148,7 @@ export default function AboutSection() {
             </div>
 
             <p className="mt-4 text-sm leading-6 text-white/60">
-              Real-time engineering telemetry synthesized by GitFUT from GitHub commit cadence, language breadth, and shipping frequency. Positioned as an offensive Striker (ST) leading with high technical agility (<span className="text-white font-medium">81 DRI</span>) and decisive execution velocity (<span className="text-white font-medium">79 SHO</span>).
+              Real-time engineering telemetry synthesized by GitFUT from GitHub commit cadence, language breadth, and shipping frequency. Positioned as an offensive Striker (ST) with the Fantasista archetype, leading with high technical agility (<span className="text-white font-medium">82 DRI</span>) and decisive execution velocity (<span className="text-white font-medium">78 SHO</span>).
             </p>
 
             {/* 6 Stat Bars Grid */}
