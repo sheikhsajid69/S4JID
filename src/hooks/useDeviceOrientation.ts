@@ -40,8 +40,7 @@ export function useDeviceOrientation(elementRef?: React.RefObject<HTMLElement | 
         } else {
           setPermissionGranted(false);
         }
-      } catch (err) {
-        console.error("Device orientation permission request failed:", err);
+      } catch {
         setPermissionGranted(false);
       }
     } else {

@@ -70,8 +70,7 @@ export default function App() {
       }
 
       const attemptPlay = () => {
-        video.play().catch((err) => {
-          console.log("Autoplay failed, retrying on user interaction...", err);
+        video.play().catch(() => {
           const enablePlay = () => {
             video.play();
             document.removeEventListener("click", enablePlay);

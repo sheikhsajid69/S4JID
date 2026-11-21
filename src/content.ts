@@ -8,7 +8,7 @@ export type Stat = {
   label: string;
 };
 
-export type GitfutAttribute = {
+type GitfutAttribute = {
   key: string;
   label: string;
   value: number;
